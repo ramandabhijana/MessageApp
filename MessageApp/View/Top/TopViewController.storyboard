@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Top View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="TopViewController" id="Y6W-OH-hqX" customClass="TopViewController" customModule="MessageApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xhI-op-oRr">
+                                <rect key="frame" x="16" y="742" width="382" height="104"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0oW-kf-9kU">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Mys-YV-cnc"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="RegistryBtn"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="RegistryBtn"/>
+                                        <connections>
+                                            <action selector="didTapRegistryButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Ao3-72-sIF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sq9-50-eT1">
+                                        <rect key="frame" x="0.0" y="60" width="382" height="44"/>
+                                        <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="LoginBtn"/>
+                                        <connections>
+                                            <action selector="didTapLoginButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aiq-2c-kW3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AppName.Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olk-sB-aTk">
+                                <rect key="frame" x="100" y="665" width="214.5" height="37"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="xhI-op-oRr" secondAttribute="bottom" constant="16" id="0tL-Ul-h3Q"/>
+                            <constraint firstItem="olk-sB-aTk" firstAttribute="centerX" secondItem="xhI-op-oRr" secondAttribute="centerX" id="OP1-El-Xn4"/>
+                            <constraint firstItem="xhI-op-oRr" firstAttribute="top" secondItem="olk-sB-aTk" secondAttribute="bottom" constant="40" id="i3s-Rf-rPM"/>
+                            <constraint firstItem="xhI-op-oRr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="sqO-BB-b36"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xhI-op-oRr" secondAttribute="trailing" constant="16" id="tJR-4X-tKX"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="8WY-Ko-jEc"/>
+                    <connections>
+                        <outlet property="appNameLabel" destination="olk-sB-aTk" id="uqY-CV-4bn"/>
+                        <outlet property="loginButton" destination="sq9-50-eT1" id="XfZ-9h-l7r"/>
+                        <outlet property="registryButton" destination="0oW-kf-9kU" id="eS5-Ku-rrl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="989.85507246376824" y="118.52678571428571"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="secondarySystemFillColor">
+            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.16" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
