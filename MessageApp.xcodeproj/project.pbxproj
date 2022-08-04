@@ -21,7 +21,20 @@
 		EB76832F289962F90083B2E9 /* RegistryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB76832E289962F90083B2E9 /* RegistryRequest.swift */; };
 		EB768332289971C30083B2E9 /* RegistryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB768331289971C30083B2E9 /* RegistryResponse.swift */; };
 		EB768334289972890083B2E9 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB768333289972890083B2E9 /* ErrorResponse.swift */; };
-		EB768336289983BA0083B2E9 /* TemporaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB768335289983BA0083B2E9 /* TemporaryViewController.swift */; };
+		EBA1E707289A3D6F0077DFA9 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA1E706289A3D6F0077DFA9 /* Symbols.swift */; };
+		EBA1E70C289A3F210077DFA9 /* ProfileFeedViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBA1E70B289A3F210077DFA9 /* ProfileFeedViewController.storyboard */; };
+		EBA1E70E289A3F320077DFA9 /* ProfileFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA1E70D289A3F320077DFA9 /* ProfileFeedViewController.swift */; };
+		EBA1E710289A3F4B0077DFA9 /* TalkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA1E70F289A3F4B0077DFA9 /* TalkListViewController.swift */; };
+		EBA1E712289A3F610077DFA9 /* TalkListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBA1E711289A3F610077DFA9 /* TalkListViewController.storyboard */; };
+		EBA1E714289A3F7E0077DFA9 /* MyPageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBA1E713289A3F7E0077DFA9 /* MyPageViewController.storyboard */; };
+		EBA1E716289A3F8C0077DFA9 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA1E715289A3F8C0077DFA9 /* MyPageViewController.swift */; };
+		EBA1E718289A47360077DFA9 /* MyPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA1E717289A47360077DFA9 /* MyPagePresenter.swift */; };
+		EBA1E71F289A568E0077DFA9 /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBA1E71E289A568E0077DFA9 /* LoginViewController.storyboard */; };
+		EBA1E721289A5AFC0077DFA9 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA1E720289A5AFC0077DFA9 /* LoginPresenter.swift */; };
+		EBA1E723289A71B00077DFA9 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA1E722289A71B00077DFA9 /* KeyboardHandler.swift */; };
+		EBA1E725289B59090077DFA9 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA1E724289B59090077DFA9 /* LoginRequest.swift */; };
+		EBA1E728289B5F3C0077DFA9 /* RootViewControllerReplacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA1E727289B5F3C0077DFA9 /* RootViewControllerReplacing.swift */; };
+		EBA1E72A289B62340077DFA9 /* APIErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA1E729289B62340077DFA9 /* APIErrorHandling.swift */; };
 		EBD7DB15289790890015A1FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD7DB14289790890015A1FF /* AppDelegate.swift */; };
 		EBD7DB17289790890015A1FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD7DB16289790890015A1FF /* SceneDelegate.swift */; };
 		EBD7DB1E2897908F0015A1FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBD7DB1D2897908F0015A1FF /* Assets.xcassets */; };
@@ -54,7 +67,20 @@
 		EB76832E289962F90083B2E9 /* RegistryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistryRequest.swift; sourceTree = "<group>"; };
 		EB768331289971C30083B2E9 /* RegistryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistryResponse.swift; sourceTree = "<group>"; };
 		EB768333289972890083B2E9 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
-		EB768335289983BA0083B2E9 /* TemporaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryViewController.swift; sourceTree = "<group>"; };
+		EBA1E706289A3D6F0077DFA9 /* Symbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbols.swift; sourceTree = "<group>"; };
+		EBA1E70B289A3F210077DFA9 /* ProfileFeedViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileFeedViewController.storyboard; sourceTree = "<group>"; };
+		EBA1E70D289A3F320077DFA9 /* ProfileFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFeedViewController.swift; sourceTree = "<group>"; };
+		EBA1E70F289A3F4B0077DFA9 /* TalkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkListViewController.swift; sourceTree = "<group>"; };
+		EBA1E711289A3F610077DFA9 /* TalkListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TalkListViewController.storyboard; sourceTree = "<group>"; };
+		EBA1E713289A3F7E0077DFA9 /* MyPageViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPageViewController.storyboard; sourceTree = "<group>"; };
+		EBA1E715289A3F8C0077DFA9 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		EBA1E717289A47360077DFA9 /* MyPagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPagePresenter.swift; sourceTree = "<group>"; };
+		EBA1E71E289A568E0077DFA9 /* LoginViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
+		EBA1E720289A5AFC0077DFA9 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		EBA1E722289A71B00077DFA9 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
+		EBA1E724289B59090077DFA9 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		EBA1E727289B5F3C0077DFA9 /* RootViewControllerReplacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewControllerReplacing.swift; sourceTree = "<group>"; };
+		EBA1E729289B62340077DFA9 /* APIErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorHandling.swift; sourceTree = "<group>"; };
 		EBD7DB11289790890015A1FF /* MessageApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MessageApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD7DB14289790890015A1FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBD7DB16289790890015A1FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +156,7 @@
 			children = (
 				EB768328289929CD0083B2E9 /* Extensions */,
 				EB768329289929E20083B2E9 /* KeychainHelper.swift */,
+				EBA1E722289A71B00077DFA9 /* KeyboardHandler.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -148,7 +175,6 @@
 			children = (
 				EB768323289919C40083B2E9 /* MainTabViewController.storyboard */,
 				EB768325289919E00083B2E9 /* MainTabViewController.swift */,
-				EB768335289983BA0083B2E9 /* TemporaryViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -157,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				EB76832E289962F90083B2E9 /* RegistryRequest.swift */,
+				EBA1E724289B59090077DFA9 /* LoginRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -185,6 +212,42 @@
 				EB768333289972890083B2E9 /* ErrorResponse.swift */,
 			);
 			path = DataModel;
+			sourceTree = "<group>";
+		};
+		EBA1E708289A3EBA0077DFA9 /* ProfileFeed */ = {
+			isa = PBXGroup;
+			children = (
+				EBA1E70B289A3F210077DFA9 /* ProfileFeedViewController.storyboard */,
+				EBA1E70D289A3F320077DFA9 /* ProfileFeedViewController.swift */,
+			);
+			path = ProfileFeed;
+			sourceTree = "<group>";
+		};
+		EBA1E709289A3EC90077DFA9 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				EBA1E711289A3F610077DFA9 /* TalkListViewController.storyboard */,
+				EBA1E70F289A3F4B0077DFA9 /* TalkListViewController.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		EBA1E70A289A3ED90077DFA9 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				EBA1E713289A3F7E0077DFA9 /* MyPageViewController.storyboard */,
+				EBA1E715289A3F8C0077DFA9 /* MyPageViewController.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		EBA1E726289B5D080077DFA9 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				EBA1E727289B5F3C0077DFA9 /* RootViewControllerReplacing.swift */,
+				EBA1E729289B62340077DFA9 /* APIErrorHandling.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		EBD7DB08289790890015A1FF = {
@@ -248,6 +311,9 @@
 				EBD7DB3628979A080015A1FF /* SignUp */,
 				EBD7DB35289799F60015A1FF /* Login */,
 				EB768322289918F40083B2E9 /* Main */,
+				EBA1E708289A3EBA0077DFA9 /* ProfileFeed */,
+				EBA1E709289A3EC90077DFA9 /* Message */,
+				EBA1E70A289A3ED90077DFA9 /* MyPage */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -255,8 +321,11 @@
 		EBD7DB2F289791E60015A1FF /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				EBA1E726289B5D080077DFA9 /* Protocols */,
 				EBD7DB3B28979B7E0015A1FF /* TopPresenter.swift */,
 				EB76831A2898EC7D0083B2E9 /* SignUpPresenter.swift */,
+				EBA1E720289A5AFC0077DFA9 /* LoginPresenter.swift */,
+				EBA1E717289A47360077DFA9 /* MyPagePresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -265,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				EBD7DB31289797380015A1FF /* Colors.swift */,
+				EBA1E706289A3D6F0077DFA9 /* Symbols.swift */,
 				EBD7DB332897980C0015A1FF /* Constants.swift */,
 			);
 			path = Resources;
@@ -274,6 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				EBD7DB3728979A250015A1FF /* LoginViewController.swift */,
+				EBA1E71E289A568E0077DFA9 /* LoginViewController.storyboard */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -348,9 +419,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBD7DB2A289791090015A1FF /* TopViewController.storyboard in Resources */,
+				EBA1E70C289A3F210077DFA9 /* ProfileFeedViewController.storyboard in Resources */,
+				EBA1E714289A3F7E0077DFA9 /* MyPageViewController.storyboard in Resources */,
 				EBD7DB212897908F0015A1FF /* LaunchScreen.storyboard in Resources */,
 				EBD7DB1E2897908F0015A1FF /* Assets.xcassets in Resources */,
 				EB529D012897B0A9004CB8E9 /* SignUpViewController.storyboard in Resources */,
+				EBA1E712289A3F610077DFA9 /* TalkListViewController.storyboard in Resources */,
+				EBA1E71F289A568E0077DFA9 /* LoginViewController.storyboard in Resources */,
 				EB768324289919C40083B2E9 /* MainTabViewController.storyboard in Resources */,
 				EB1718B02898274A0085B612 /* InputField.xib in Resources */,
 			);
@@ -405,25 +480,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBA1E725289B59090077DFA9 /* LoginRequest.swift in Sources */,
 				EBD7DB3C28979B7E0015A1FF /* TopPresenter.swift in Sources */,
+				EBA1E728289B5F3C0077DFA9 /* RootViewControllerReplacing.swift in Sources */,
+				EBA1E72A289B62340077DFA9 /* APIErrorHandling.swift in Sources */,
+				EBA1E723289A71B00077DFA9 /* KeyboardHandler.swift in Sources */,
 				EBD7DB3828979A250015A1FF /* LoginViewController.swift in Sources */,
 				EB1718B2289828110085B612 /* InputField.swift in Sources */,
+				EBA1E718289A47360077DFA9 /* MyPagePresenter.swift in Sources */,
 				EB76832D2899405B0083B2E9 /* APIClient.swift in Sources */,
 				EBD7DB3A28979AF70015A1FF /* SignUpViewController.swift in Sources */,
 				EB76832F289962F90083B2E9 /* RegistryRequest.swift in Sources */,
 				EB768320289912740083B2E9 /* ViewController+.swift in Sources */,
+				EBA1E721289A5AFC0077DFA9 /* LoginPresenter.swift in Sources */,
+				EBA1E716289A3F8C0077DFA9 /* MyPageViewController.swift in Sources */,
 				EB768326289919E00083B2E9 /* MainTabViewController.swift in Sources */,
 				EBD7DB342897980C0015A1FF /* Constants.swift in Sources */,
 				EB7683182898D70E0083B2E9 /* FormSubmitButton.swift in Sources */,
-				EB768336289983BA0083B2E9 /* TemporaryViewController.swift in Sources */,
 				EBD7DB2C289791290015A1FF /* TopViewController.swift in Sources */,
 				EBD7DB32289797380015A1FF /* Colors.swift in Sources */,
 				EBD7DB15289790890015A1FF /* AppDelegate.swift in Sources */,
+				EBA1E710289A3F4B0077DFA9 /* TalkListViewController.swift in Sources */,
+				EBA1E707289A3D6F0077DFA9 /* Symbols.swift in Sources */,
 				EB76831B2898EC7D0083B2E9 /* SignUpPresenter.swift in Sources */,
 				EB76831E2899032A0083B2E9 /* String+.swift in Sources */,
 				EB768332289971C30083B2E9 /* RegistryResponse.swift in Sources */,
 				EB768334289972890083B2E9 /* ErrorResponse.swift in Sources */,
 				EB76832A289929E20083B2E9 /* KeychainHelper.swift in Sources */,
+				EBA1E70E289A3F320077DFA9 /* ProfileFeedViewController.swift in Sources */,
 				EBD7DB17289790890015A1FF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

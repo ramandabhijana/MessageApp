@@ -20,27 +20,27 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="D9V-RT-gby">
-                                        <rect key="frame" x="16" y="16" width="382" height="6789"/>
+                                        <rect key="frame" x="16" y="16" width="382" height="113733"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Jg2-rh-VIG" userLabel="TextFields Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="382" height="6645"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="113589"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qSf-dP-Vfw" customClass="InputField" customModule="MessageApp" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="1829"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="31261.5"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5d-IE-H8H" customClass="InputField" customModule="MessageApp" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="1845" width="382" height="1822"/>
+                                                        <rect key="frame" x="0.0" y="31277.5" width="382" height="31148"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0jc-1m-RwY" customClass="InputField" customModule="MessageApp" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="3683" width="382" height="2962"/>
+                                                        <rect key="frame" x="0.0" y="62441.5" width="382" height="51147.5"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdd-WR-U9d" customClass="FormSubmitButton" customModule="MessageApp" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="6745" width="382" height="44"/>
+                                                <rect key="frame" x="0.0" y="113689" width="382" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="uR6-eC-XWA"/>
                                                 </constraints>

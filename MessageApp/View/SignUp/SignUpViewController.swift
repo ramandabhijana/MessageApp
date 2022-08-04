@@ -17,6 +17,7 @@ class SignUpViewController: UIViewController {
   @IBOutlet weak var scrollView: UIScrollView!
   
   private var presenter: SignUpPresenterProtocol
+  private let keyboardResponder = KeyboardResponder()
   private let disposeBag = DisposeBag()
   
   static func createFromStoryboard(presenter: SignUpPresenterProtocol = SignUpPresenter()) -> SignUpViewController {
@@ -53,10 +54,11 @@ class SignUpViewController: UIViewController {
     userNameField.fieldLabel.text = "User Name"
     userNameField.textField.placeholder = "Max. 20 characters"
     emailField.fieldLabel.text = "Email"
-    emailField.textField.placeholder = "E.g. user@mail.net"
+    emailField.textField.placeholder = EMAIL_PLACEHOLDER_TEXT
     emailField.textField.keyboardType = .emailAddress
     passwordField.fieldLabel.text = "Password"
-    passwordField.textField.placeholder = "Only 5 - 9 alphabet and/or number characters"
+    passwordField.textField.placeholder = PASSWORD_PLACEHOLDER_TEXT
+    passwordField.textField.autocorrectionType = .no
     passwordField.textField.isSecureTextEntry = true
     registryButton.configuration?.title = REGISTRY_BUTTON_TITLE
     registryButton.disable()
@@ -72,38 +74,16 @@ class SignUpViewController: UIViewController {
       .disposed(by: disposeBag)
   }
   
+  private func setupKeyboardInterruptionHandler() {
+    keyboardResponder.keyboardHeight
+      .observeOn(MainScheduler.instance)
+      .subscribe { [weak self] height in
+        self?.scrollView.contentInset.bottom = height
+      }
+      .disposed(by: disposeBag)
+  }
+  
   @IBAction func didTapRegistryButton(_ sender: UIButton) {
     presenter.submitForm()
-  }
-  
-}
-
-// MARK: - Handle Keyboard Interruption
-private extension SignUpViewController {
-  private func setupKeyboardInterruptionHandler() {
-    NotificationCenter.default.addObserver(
-      self,
-      selector: #selector(keyboardWillShow),
-      name:UIResponder.keyboardWillShowNotification,
-      object: nil)
-    NotificationCenter.default.addObserver(
-      self,
-      selector: #selector(keyboardWillHide),
-      name:UIResponder.keyboardWillHideNotification,
-      object: nil)
-  }
-  
-  @objc func keyboardWillShow(notification:NSNotification) {
-    guard let userInfo = notification.userInfo else { return }
-    var keyboardFrame = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-    keyboardFrame = view.convert(keyboardFrame, from: nil)
-    var contentInset = scrollView.contentInset
-    contentInset.bottom = keyboardFrame.size.height + 20
-    scrollView.contentInset = contentInset
-  }
-  
-  @objc func keyboardWillHide(notification:NSNotification) {
-    let contentInset = UIEdgeInsets.zero
-    scrollView.contentInset = contentInset
   }
 }

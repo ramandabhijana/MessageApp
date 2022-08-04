@@ -14,6 +14,15 @@ class TopViewController: UIViewController {
   
   private var presenter: TopPresenterProtocol
   
+  static func createFromStoryboard(presenter: TopPresenterProtocol = TopPresenter()) -> UIViewController {
+    let name = String(describing: TopViewController.self)
+    let storyboard = UIStoryboard(name: name, bundle: nil)
+    let topViewController = storyboard.instantiateViewController(identifier: name) { coder in
+      TopViewController(coder: coder, presenter: presenter)
+    }
+    return UINavigationController(rootViewController: topViewController)
+  }
+  
   init?(coder: NSCoder, presenter: TopPresenterProtocol) {
     self.presenter = presenter
     super.init(coder: coder)

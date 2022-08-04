@@ -50,9 +50,11 @@ struct TerrarestaAPIClient {
             observer.onCompleted()
           } catch APIError.badResponse(let response) {
             observer.onError(APIError.badResponse(response))
+            observer.onCompleted()
           } catch {
             print("Catch error for request: \(request).\nError: \(error)")
             observer.onError(APIError.postProcessingFailed(error))
+            observer.onCompleted()
           }
         }
       return Disposables.create()
@@ -86,5 +88,3 @@ enum APIError: Error {
   case noData
   case badResponse(ErrorResponse)
 }
-
-

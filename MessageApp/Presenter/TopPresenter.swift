@@ -22,7 +22,7 @@ class TopPresenter: TopPresenterProtocol {
   }
   
   func loginButtonTapped() {
-    let loginViewController = LoginViewController()
+    let loginViewController = LoginViewController.createFromStoryboard()
     viewController?.navigationController?.pushViewController(loginViewController, animated: true)
   }
 }

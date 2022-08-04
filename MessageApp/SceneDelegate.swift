@@ -20,13 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     if let _ = KeychainHelper.shared.readMessageAppTerrarestaAccessToken() {
       rootViewController = MainTabViewController.createFromStoryboard()
     } else {
-      let viewControllerName = String(describing: TopViewController.self)
-      let storyboard = UIStoryboard(name: viewControllerName, bundle: nil)
-      rootViewController = storyboard.instantiateViewController(identifier: viewControllerName) { coder in
-        return TopViewController(coder: coder, presenter: TopPresenter())
-      }
+      rootViewController = TopViewController.createFromStoryboard()
     }
-    window?.rootViewController = UINavigationController(rootViewController: rootViewController)
+    window?.rootViewController = rootViewController
     window?.makeKeyAndVisible()
   }
 

@@ -6,21 +6,20 @@
 //
 
 import Foundation
-
 import RxSwift
 
 protocol SignUpPresenterProtocol {
   var viewController: SignUpViewController? { get set }
-  var canLogin: Bool { get }
+  var canSubmitForm: Bool { get }
   
   func setupFormValidation(nameText: Observable<String>, emailText: Observable<String>, passwordText: Observable<String>)
   func submitForm()
 }
 
-class SignUpPresenter: SignUpPresenterProtocol {
+class SignUpPresenter: SignUpPresenterProtocol, RootViewControllerReplacing, APIErrorHandling {
   weak var viewController: SignUpViewController?
   
-  private(set) var canLogin: Bool = false
+  private(set) var canSubmitForm: Bool = false
   private let disposeBag = DisposeBag()
   
   func setupFormValidation(
@@ -36,11 +35,8 @@ class SignUpPresenter: SignUpPresenterProtocol {
   }
   
   func submitForm() {
-    guard canLogin else {
-      viewController?.showAlert(
-        title: "Check your input",
-        message: "Make sure all are filled in correctly then try again."
-      )
+    guard canSubmitForm else {
+      viewController?.showUnsatisfiedInputAlert()
       return
     }
     viewController?.registryButton.showLoading()
@@ -63,32 +59,17 @@ class SignUpPresenter: SignUpPresenterProtocol {
               return
             }
             // Replace the rootViewController
-            let mainTabViewController = MainTabViewController.createFromStoryboard()
-            self?.viewController?.replaceRootViewController(with: UINavigationController(rootViewController: mainTabViewController))
+            self?.replaceRootViewControllerWithMainTabViewController()
           }
         },
         onError: { [weak self] error in
-          guard let apiError = error as? APIError else { return }
-          let title: String
-          let message: String?
-          switch apiError {
-          case .requestFailed(let statusCode):
-            title = "Error \(statusCode)"
-            message = nil
-            break
-          case .postProcessingFailed(let error):
-            print(error.localizedDescription)
-            title = "Internal Error"
-            message = "Something went wrong please contact the developer."
-          case .noData:
-            title = "No Data"
-            message = "Seems there is an error with our server."
-          case .badResponse(let errorResponse):
-            title = errorResponse.titleOrDefault
-            message = errorResponse.messageOrDefault
+          guard let self = self else { return }
+          var titleMessage: (String, String?) = ("Error", nil)
+          if let apiError = error as? APIError {
+            titleMessage = self.getErrorTitleAndMessage(forError: apiError)
           }
-          self?.viewController?.showAlert(title: title, message: message)
-          self?.viewController?.registryButton.enable()
+          self.viewController?.showAlert(title: titleMessage.0, message: titleMessage.1)
+          self.viewController?.registryButton.enable()
         },
         onCompleted: {
           print("\nRegistry request completed\n")
@@ -110,7 +91,7 @@ class SignUpPresenter: SignUpPresenterProtocol {
       if emailIsValid {
         self?.viewController?.emailField.hideError()
       } else {
-        self?.viewController?.emailField.showError(with: "Email is not properly formatted")
+        self?.viewController?.emailField.showError(with: EMAIL_INCORRECT_FORMAT_MESSAGE)
       }
     })
     .disposed(by: disposeBag)
@@ -122,7 +103,7 @@ class SignUpPresenter: SignUpPresenterProtocol {
         if passwordIsValid {
           self?.viewController?.passwordField.hideError()
         } else {
-          self?.viewController?.passwordField.showError(with: "Incorrect password format. Please use 5-9 character alphabets and/or numbers only")
+          self?.viewController?.passwordField.showError(with: PASSWORD_INCORRECT_FORMAT_MESSAGE)
         }
       })
       .disposed(by: disposeBag)
@@ -131,7 +112,7 @@ class SignUpPresenter: SignUpPresenterProtocol {
       $0 && $1
     }
     validFieldsObservable.subscribe(onNext: { [weak self] allFieldsAreValid in
-      self?.canLogin = allFieldsAreValid
+      self?.canSubmitForm = allFieldsAreValid
     })
     .disposed(by: disposeBag)
   }

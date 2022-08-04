@@ -4,61 +4,9 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Temporary View Controller-->
-        <scene sceneID="s0d-6b-0kx">
-            <objects>
-                <viewController id="Y6W-OH-hqX" customClass="TemporaryViewController" customModule="MessageApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="v87-TL-ZdB">
-                                <rect key="frame" x="54.5" y="411.5" width="305" height="73"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92g-Kg-TRB">
-                                        <rect key="frame" x="101.5" y="0.0" width="102.5" height="26.5"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MainTabViewController" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mnj-vq-S0t">
-                                        <rect key="frame" x="0.0" y="34.5" width="305" height="38.5"/>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="32"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NUk-WV-Hv6">
-                                <rect key="frame" x="172.5" y="766" width="69.5" height="31"/>
-                                <color key="tintColor" systemColor="systemRedColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="Logout"/>
-                                <connections>
-                                    <action selector="logoutButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Jsy-Uv-xl0"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="NUk-WV-Hv6" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="aTJ-eS-zYr"/>
-                            <constraint firstItem="NUk-WV-Hv6" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="-16" id="d0T-cb-HAE"/>
-                            <constraint firstItem="v87-TL-ZdB" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="hFU-A1-0oF"/>
-                            <constraint firstItem="v87-TL-ZdB" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="rxz-fA-cxo"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" id="4Fl-Qj-qEP"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1013.0434782608696" y="118.52678571428571"/>
-        </scene>
         <!--Main Tab View Controller-->
         <scene sceneID="AS6-oH-LbZ">
             <objects>
@@ -70,9 +18,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="selectedImageTintColor" name="AppGreen"/>
                     </tabBar>
-                    <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="viewControllers" id="Plx-3s-RHi"/>
-                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TQx-Sr-fY2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -83,11 +28,5 @@
         <namedColor name="AppGreen">
             <color red="0.36862745098039218" green="0.67843137254901964" blue="0.086274509803921567" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>

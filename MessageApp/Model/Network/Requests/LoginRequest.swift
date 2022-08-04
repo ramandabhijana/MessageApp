@@ -1,30 +1,28 @@
 //
-//  RegistryRequest.swift
+//  LoginRequest.swift
 //  MessageApp
 //
-//  Created by Abhijana Agung Ramanda on 02/08/22.
+//  Created by Abhijana Agung Ramanda on 04/08/22.
 //
 
 import Foundation
 
-struct RegistryRequest: APIRequest {
+struct LoginRequest: APIRequest {
   
   typealias Response = RegistryResponse
   
   let email: String
   let password: String
-  let nickname: String
   let language: String = "en"
   
-  var method: HTTPMethod { return .GET }
-  var path: String { return "/app/api/SignUpCtrl/SignUp" }
-  var body: Data? { return nil }
-  var contentType: String { return "application/json" }
-  var additionalHeaders: [String : String] { return [:] }
+  var method: HTTPMethod { .GET }
+  var path: String { "/app/api/LoginCtrl/Login" }
+  var body: Data? { nil }
+  var contentType: String { "application/json" }
+  var additionalHeaders: [String : String] { [:] }
   var params: [URLQueryItem] {
     [URLQueryItem(name: "login_id", value: email),
      URLQueryItem(name: "password", value: password),
-     URLQueryItem(name: "nickname", value: nickname),
      URLQueryItem(name: "language", value: language)]
   }
   
