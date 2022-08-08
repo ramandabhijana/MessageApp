@@ -10,9 +10,9 @@ import RxCocoa
 import RxSwift
 
 class SignUpViewController: UIViewController {
-  @IBOutlet weak var userNameField: InputField!
-  @IBOutlet weak var emailField: InputField!
-  @IBOutlet weak var passwordField: InputField!
+  @IBOutlet weak var userNameTextField: InputTextField!
+  @IBOutlet weak var emailTextField: InputTextField!
+  @IBOutlet weak var passwordTextField: InputTextField!
   @IBOutlet weak var registryButton: FormSubmitButton!
   @IBOutlet weak var scrollView: UIScrollView!
   
@@ -45,31 +45,27 @@ class SignUpViewController: UIViewController {
     setupNameTextFieldCharacterLimiter()
     setupKeyboardInterruptionHandler()
     presenter.setupFormValidation(
-      nameText: userNameField.textField.rx.text.orEmpty.share(),
-      emailText: emailField.textField.rx.text.orEmpty.share(),
-      passwordText: passwordField.textField.rx.text.orEmpty.share())
+      nameText: userNameTextField.rx.text.orEmpty.share(),
+      emailText: emailTextField.rx.text.orEmpty.share(),
+      passwordText: passwordTextField.rx.text.orEmpty.share())
   }
   
   private func setupView() {
-    userNameField.fieldLabel.text = "User Name"
-    userNameField.textField.placeholder = "Max. 20 characters"
-    emailField.fieldLabel.text = "Email"
-    emailField.textField.placeholder = EMAIL_PLACEHOLDER_TEXT
-    emailField.textField.keyboardType = .emailAddress
-    passwordField.fieldLabel.text = "Password"
-    passwordField.textField.placeholder = PASSWORD_PLACEHOLDER_TEXT
-    passwordField.textField.autocorrectionType = .no
-    passwordField.textField.isSecureTextEntry = true
+    userNameTextField.fieldName = "User Name"
+    emailTextField.fieldName = "Email"
+    emailTextField.keyboardType = .emailAddress
+    passwordTextField.fieldName = "Password"
+    passwordTextField.isSecureTextEntry = true
     registryButton.configuration?.title = REGISTRY_BUTTON_TITLE
     registryButton.disable()
   }
   
   private func setupNameTextFieldCharacterLimiter() {
     let MAX_CHARACTER_COUNT_FOR_NAME = 20
-    userNameField.textField.rx.controlEvent(.editingChanged)
+    userNameTextField.rx.controlEvent(.editingChanged)
       .subscribe(onNext: { [weak self] in
-        guard let text = self?.userNameField.textField.text else { return }
-        self?.userNameField.textField.text = String(text.prefix(MAX_CHARACTER_COUNT_FOR_NAME))
+        guard let text = self?.userNameTextField.text else { return }
+        self?.userNameTextField.text = String(text.prefix(MAX_CHARACTER_COUNT_FOR_NAME))
       })
       .disposed(by: disposeBag)
   }

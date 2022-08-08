@@ -19,28 +19,26 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZmQ-TU-BMp">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="D9V-RT-gby">
-                                        <rect key="frame" x="16" y="16" width="382" height="113733"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pek-iU-1xk" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Jg2-rh-VIG" userLabel="TextFields Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="382" height="113589"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qSf-dP-Vfw" customClass="InputField" customModule="MessageApp" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="31261.5"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5d-IE-H8H" customClass="InputField" customModule="MessageApp" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="31277.5" width="382" height="31148"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0jc-1m-RwY" customClass="InputField" customModule="MessageApp" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="62441.5" width="382" height="51147.5"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    </view>
-                                                </subviews>
-                                            </stackView>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GK4-kY-Tca" customClass="InputTextField" customModule="MessageApp" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="16" width="382" height="64"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Icb-Gc-INA" customClass="InputTextField" customModule="MessageApp" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="96" width="382" height="64"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OaD-zU-Mzj" customClass="InputTextField" customModule="MessageApp" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="176" width="382" height="64"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdd-WR-U9d" customClass="FormSubmitButton" customModule="MessageApp" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="113689" width="382" height="44"/>
+                                                <rect key="frame" x="54" y="340" width="306" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="uR6-eC-XWA"/>
                                                 </constraints>
@@ -51,13 +49,30 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                    </stackView>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="OaD-zU-Mzj" firstAttribute="top" secondItem="Icb-Gc-INA" secondAttribute="bottom" constant="16" id="4UZ-RD-Lof"/>
+                                            <constraint firstItem="GK4-kY-Tca" firstAttribute="top" secondItem="Pek-iU-1xk" secondAttribute="top" constant="16" id="6zK-9d-Ay2"/>
+                                            <constraint firstItem="Icb-Gc-INA" firstAttribute="top" secondItem="GK4-kY-Tca" secondAttribute="bottom" constant="16" id="9rp-6k-WQA"/>
+                                            <constraint firstItem="zdd-WR-U9d" firstAttribute="centerX" secondItem="OaD-zU-Mzj" secondAttribute="centerX" id="Aaa-lf-oyi"/>
+                                            <constraint firstItem="OaD-zU-Mzj" firstAttribute="centerX" secondItem="Icb-Gc-INA" secondAttribute="centerX" id="F6g-Pi-dcJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="GK4-kY-Tca" secondAttribute="trailing" constant="16" id="Iun-SR-ssr"/>
+                                            <constraint firstItem="OaD-zU-Mzj" firstAttribute="width" secondItem="Icb-Gc-INA" secondAttribute="width" id="OHL-9m-Gr3"/>
+                                            <constraint firstItem="zdd-WR-U9d" firstAttribute="width" secondItem="OaD-zU-Mzj" secondAttribute="width" multiplier="0.8" id="gl5-SZ-VjH"/>
+                                            <constraint firstItem="Icb-Gc-INA" firstAttribute="centerX" secondItem="GK4-kY-Tca" secondAttribute="centerX" id="hYK-Wj-XRI"/>
+                                            <constraint firstItem="GK4-kY-Tca" firstAttribute="leading" secondItem="Pek-iU-1xk" secondAttribute="leading" constant="16" id="swX-2J-g8Y"/>
+                                            <constraint firstItem="zdd-WR-U9d" firstAttribute="top" secondItem="OaD-zU-Mzj" secondAttribute="bottom" constant="100" id="xRz-yk-hzs"/>
+                                            <constraint firstItem="Icb-Gc-INA" firstAttribute="width" secondItem="GK4-kY-Tca" secondAttribute="width" id="zbz-MM-b1n"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="D9V-RT-gby" firstAttribute="leading" secondItem="jTK-UL-icz" secondAttribute="leading" constant="16" id="5wj-h6-9k0"/>
-                                    <constraint firstItem="D9V-RT-gby" firstAttribute="trailing" secondItem="jTK-UL-icz" secondAttribute="trailing" constant="16" id="Yrl-vw-oTo"/>
-                                    <constraint firstItem="D9V-RT-gby" firstAttribute="top" secondItem="jTK-UL-icz" secondAttribute="top" constant="16" id="j0a-sG-bNB"/>
-                                    <constraint firstItem="D9V-RT-gby" firstAttribute="bottom" secondItem="jTK-UL-icz" secondAttribute="bottom" constant="-16" id="s5V-CC-FlU"/>
+                                    <constraint firstItem="Pek-iU-1xk" firstAttribute="trailing" secondItem="jTK-UL-icz" secondAttribute="trailing" id="9qQ-6V-nrl"/>
+                                    <constraint firstItem="Pek-iU-1xk" firstAttribute="height" secondItem="F3h-Yr-aMX" secondAttribute="height" id="ScZ-44-1MC"/>
+                                    <constraint firstItem="Pek-iU-1xk" firstAttribute="top" secondItem="jTK-UL-icz" secondAttribute="top" id="VxS-Fo-ZBI"/>
+                                    <constraint firstItem="Pek-iU-1xk" firstAttribute="bottom" secondItem="jTK-UL-icz" secondAttribute="bottom" id="fkw-u9-yDA"/>
+                                    <constraint firstItem="Pek-iU-1xk" firstAttribute="width" secondItem="F3h-Yr-aMX" secondAttribute="width" id="kVB-tl-JER"/>
+                                    <constraint firstItem="Pek-iU-1xk" firstAttribute="leading" secondItem="jTK-UL-icz" secondAttribute="leading" id="xdP-gC-raf"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="jTK-UL-icz"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="F3h-Yr-aMX"/>
@@ -69,16 +84,15 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="ZmQ-TU-BMp" secondAttribute="bottom" id="9aV-jm-cF6"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ZmQ-TU-BMp" secondAttribute="trailing" id="hkd-JQ-Wgh"/>
                             <constraint firstItem="ZmQ-TU-BMp" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="wSi-Ct-q3T"/>
-                            <constraint firstItem="D9V-RT-gby" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" constant="-32" id="weD-ln-INF"/>
                             <constraint firstItem="ZmQ-TU-BMp" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="xha-OH-l3m"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="emailField" destination="G5d-IE-H8H" id="YLw-7I-OTa"/>
-                        <outlet property="passwordField" destination="0jc-1m-RwY" id="BlM-Vd-E9f"/>
+                        <outlet property="emailTextField" destination="Icb-Gc-INA" id="jhO-1g-yf7"/>
+                        <outlet property="passwordTextField" destination="OaD-zU-Mzj" id="dHR-eZ-J33"/>
                         <outlet property="registryButton" destination="zdd-WR-U9d" id="fBe-es-sEz"/>
                         <outlet property="scrollView" destination="ZmQ-TU-BMp" id="ulw-1D-K12"/>
-                        <outlet property="userNameField" destination="qSf-dP-Vfw" id="dMd-qu-q2q"/>
+                        <outlet property="userNameTextField" destination="GK4-kY-Tca" id="pM0-NH-vPS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -86,6 +100,17 @@
             <point key="canvasLocation" x="118.84057971014494" y="118.52678571428571"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="GK4-kY-Tca">
+            <size key="intrinsicContentSize" width="24" height="0.5"/>
+        </designable>
+        <designable name="Icb-Gc-INA">
+            <size key="intrinsicContentSize" width="24" height="0.5"/>
+        </designable>
+        <designable name="OaD-zU-Mzj">
+            <size key="intrinsicContentSize" width="24" height="0.5"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -42,9 +42,9 @@ class SignUpPresenter: SignUpPresenterProtocol, RootViewControllerReplacing, API
     viewController?.registryButton.showLoading()
     // make API request
     let registryRequest = RegistryRequest(
-      email: (viewController?.emailField.textField.text)!,
-      password: (viewController?.passwordField.textField.text)!,
-      nickname: (viewController?.userNameField.textField.text)!
+      email: (viewController?.emailTextField.text)!,
+      password: (viewController?.passwordTextField.text)!,
+      nickname: (viewController?.userNameTextField.text)!
     )
     TerrarestaAPIClient.performRequest(registryRequest)
       .subscribe(
@@ -88,11 +88,9 @@ class SignUpPresenter: SignUpPresenterProtocol, RootViewControllerReplacing, API
     emailValid
       .skip(2)
       .subscribe(onNext: { [weak self] emailIsValid in
-      if emailIsValid {
-        self?.viewController?.emailField.hideError()
-      } else {
-        self?.viewController?.emailField.showError(with: EMAIL_INCORRECT_FORMAT_MESSAGE)
-      }
+        self?.viewController?.emailTextField.textFieldState = emailIsValid
+          ? .normal
+          : .error(message: EMAIL_INCORRECT_FORMAT_MESSAGE)
     })
     .disposed(by: disposeBag)
     
@@ -100,11 +98,9 @@ class SignUpPresenter: SignUpPresenterProtocol, RootViewControllerReplacing, API
       .skip(2)
       .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
       .subscribe(onNext: { [weak self] passwordIsValid in
-        if passwordIsValid {
-          self?.viewController?.passwordField.hideError()
-        } else {
-          self?.viewController?.passwordField.showError(with: PASSWORD_INCORRECT_FORMAT_MESSAGE)
-        }
+        self?.viewController?.passwordTextField.textFieldState = passwordIsValid
+          ? .normal
+          : .error(message: PASSWORD_INCORRECT_FORMAT_MESSAGE)
       })
       .disposed(by: disposeBag)
     

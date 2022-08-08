@@ -35,8 +35,8 @@ class LoginPresenter: LoginPresenterProtocol, RootViewControllerReplacing, APIEr
     viewController?.submitButton.showLoading()
     // make API request
     let loginRequest = LoginRequest(
-      email: (viewController?.emailField.textField.text)!,
-      password: (viewController?.passwordField.textField.text)!
+      email: (viewController?.emailTextField.text)!,
+      password: (viewController?.passwordTextField.text)!
     )
     TerrarestaAPIClient.performRequest(loginRequest)
       .subscribe(
@@ -85,10 +85,12 @@ private extension LoginPresenter {
     emailValid
       .skip(2)
       .subscribe(onNext: { [weak self] emailIsValid in
-        let emailField = self?.viewController?.emailField
-        emailIsValid
-          ? emailField?.hideError()
-          : emailField?.showError(with: EMAIL_INCORRECT_FORMAT_MESSAGE)
+        self?.viewController?.emailTextField.textFieldState = emailIsValid
+          ? .normal
+          : .error(message: EMAIL_INCORRECT_FORMAT_MESSAGE)
+        UIView.animate(withDuration: 0.5, animations: {
+          self?.viewController?.view.layoutIfNeeded()
+        }, completion: nil)
       })
       .disposed(by: disposeBag)
     
@@ -96,10 +98,12 @@ private extension LoginPresenter {
       .skip(2)
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] passwordIsValid in
-        let passwordField = self?.viewController?.passwordField
-        passwordIsValid
-          ? passwordField?.hideError()
-          : passwordField?.showError(with: PASSWORD_INCORRECT_FORMAT_MESSAGE)
+        self?.viewController?.passwordTextField.textFieldState = passwordIsValid
+          ? .normal
+          : .error(message: PASSWORD_INCORRECT_FORMAT_MESSAGE)
+        UIView.animate(withDuration: 0.5, animations: {
+          self?.viewController?.view.layoutIfNeeded()
+        }, completion: nil)
       })
       .disposed(by: disposeBag)
     

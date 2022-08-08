@@ -10,8 +10,8 @@ import RxSwift
 
 class LoginViewController: UIViewController {
   @IBOutlet weak var scrollView: UIScrollView!
-  @IBOutlet weak var emailField: InputField!
-  @IBOutlet weak var passwordField: InputField!
+  @IBOutlet weak var emailTextField: InputTextField!
+  @IBOutlet weak var passwordTextField: InputTextField!
   @IBOutlet weak var submitButton: FormSubmitButton!
   
   private var presenter: LoginPresenterProtocol
@@ -42,18 +42,15 @@ class LoginViewController: UIViewController {
     setupView()
     setupKeyboardInterruptionHandler()
     presenter.setupFormValidation(
-      emailText: emailField.textField.rx.text.orEmpty.share(),
-      passwordText: passwordField.textField.rx.text.orEmpty.share())
+      emailText: emailTextField.rx.text.orEmpty.share(),
+      passwordText: passwordTextField.rx.text.orEmpty.share())
   }
   
   private func setupView() {
-    emailField.fieldLabel.text = "Email"
-    emailField.textField.placeholder = EMAIL_PLACEHOLDER_TEXT
-    emailField.textField.keyboardType = .emailAddress
-    passwordField.fieldLabel.text = "Password"
-    passwordField.textField.placeholder = PASSWORD_PLACEHOLDER_TEXT
-    passwordField.textField.autocorrectionType = .no
-    passwordField.textField.isSecureTextEntry = true
+    emailTextField.fieldName = "Email"
+    emailTextField.keyboardType = .emailAddress
+    passwordTextField.fieldName = "Password"
+    passwordTextField.isSecureTextEntry = true
     submitButton.configuration?.title = LOGIN_BUTTON_TITLE
     submitButton.disable()
   }

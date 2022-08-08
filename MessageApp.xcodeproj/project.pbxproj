@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EB1718B02898274A0085B612 /* InputField.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1718AF2898274A0085B612 /* InputField.xib */; };
-		EB1718B2289828110085B612 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1718B1289828110085B612 /* InputField.swift */; };
 		EB529D012897B0A9004CB8E9 /* SignUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB529D002897B0A9004CB8E9 /* SignUpViewController.storyboard */; };
 		EB7683182898D70E0083B2E9 /* FormSubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7683172898D70E0083B2E9 /* FormSubmitButton.swift */; };
 		EB76831B2898EC7D0083B2E9 /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB76831A2898EC7D0083B2E9 /* SignUpPresenter.swift */; };
@@ -35,6 +33,7 @@
 		EBA1E725289B59090077DFA9 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA1E724289B59090077DFA9 /* LoginRequest.swift */; };
 		EBA1E728289B5F3C0077DFA9 /* RootViewControllerReplacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA1E727289B5F3C0077DFA9 /* RootViewControllerReplacing.swift */; };
 		EBA1E72A289B62340077DFA9 /* APIErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA1E729289B62340077DFA9 /* APIErrorHandling.swift */; };
+		EBC24DE4289BA66100E6C8DF /* InputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC24DE3289BA66100E6C8DF /* InputTextField.swift */; };
 		EBD7DB15289790890015A1FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD7DB14289790890015A1FF /* AppDelegate.swift */; };
 		EBD7DB17289790890015A1FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD7DB16289790890015A1FF /* SceneDelegate.swift */; };
 		EBD7DB1E2897908F0015A1FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBD7DB1D2897908F0015A1FF /* Assets.xcassets */; };
@@ -53,8 +52,6 @@
 		234114CAD52F3D96244F6963 /* Pods-MessageApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageApp.debug.xcconfig"; path = "Target Support Files/Pods-MessageApp/Pods-MessageApp.debug.xcconfig"; sourceTree = "<group>"; };
 		4F545BF48221F1406A1455B4 /* Pods_MessageApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessageApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70091D20925155E4C3A1EA8 /* Pods-MessageApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageApp.release.xcconfig"; path = "Target Support Files/Pods-MessageApp/Pods-MessageApp.release.xcconfig"; sourceTree = "<group>"; };
-		EB1718AF2898274A0085B612 /* InputField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputField.xib; sourceTree = "<group>"; };
-		EB1718B1289828110085B612 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
 		EB529D002897B0A9004CB8E9 /* SignUpViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUpViewController.storyboard; sourceTree = "<group>"; };
 		EB7683172898D70E0083B2E9 /* FormSubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSubmitButton.swift; sourceTree = "<group>"; };
 		EB76831A2898EC7D0083B2E9 /* SignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
@@ -81,6 +78,7 @@
 		EBA1E724289B59090077DFA9 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		EBA1E727289B5F3C0077DFA9 /* RootViewControllerReplacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewControllerReplacing.swift; sourceTree = "<group>"; };
 		EBA1E729289B62340077DFA9 /* APIErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorHandling.swift; sourceTree = "<group>"; };
+		EBC24DE3289BA66100E6C8DF /* InputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextField.swift; sourceTree = "<group>"; };
 		EBD7DB11289790890015A1FF /* MessageApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MessageApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD7DB14289790890015A1FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBD7DB16289790890015A1FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,19 +126,10 @@
 		EB529D022897B0AF004CB8E9 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				EB529D072897D618004CB8E9 /* InputField */,
+				EBC24DE0289BA5A200E6C8DF /* InputTextField */,
 				EB7683192898D7480083B2E9 /* FormSubmitButton */,
 			);
 			path = Shared;
-			sourceTree = "<group>";
-		};
-		EB529D072897D618004CB8E9 /* InputField */ = {
-			isa = PBXGroup;
-			children = (
-				EB1718AF2898274A0085B612 /* InputField.xib */,
-				EB1718B1289828110085B612 /* InputField.swift */,
-			);
-			path = InputField;
 			sourceTree = "<group>";
 		};
 		EB7683192898D7480083B2E9 /* FormSubmitButton */ = {
@@ -248,6 +237,14 @@
 				EBA1E729289B62340077DFA9 /* APIErrorHandling.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		EBC24DE0289BA5A200E6C8DF /* InputTextField */ = {
+			isa = PBXGroup;
+			children = (
+				EBC24DE3289BA66100E6C8DF /* InputTextField.swift */,
+			);
+			path = InputTextField;
 			sourceTree = "<group>";
 		};
 		EBD7DB08289790890015A1FF = {
@@ -427,7 +424,6 @@
 				EBA1E712289A3F610077DFA9 /* TalkListViewController.storyboard in Resources */,
 				EBA1E71F289A568E0077DFA9 /* LoginViewController.storyboard in Resources */,
 				EB768324289919C40083B2E9 /* MainTabViewController.storyboard in Resources */,
-				EB1718B02898274A0085B612 /* InputField.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,10 +482,10 @@
 				EBA1E72A289B62340077DFA9 /* APIErrorHandling.swift in Sources */,
 				EBA1E723289A71B00077DFA9 /* KeyboardHandler.swift in Sources */,
 				EBD7DB3828979A250015A1FF /* LoginViewController.swift in Sources */,
-				EB1718B2289828110085B612 /* InputField.swift in Sources */,
 				EBA1E718289A47360077DFA9 /* MyPagePresenter.swift in Sources */,
 				EB76832D2899405B0083B2E9 /* APIClient.swift in Sources */,
 				EBD7DB3A28979AF70015A1FF /* SignUpViewController.swift in Sources */,
+				EBC24DE4289BA66100E6C8DF /* InputTextField.swift in Sources */,
 				EB76832F289962F90083B2E9 /* RegistryRequest.swift in Sources */,
 				EB768320289912740083B2E9 /* ViewController+.swift in Sources */,
 				EBA1E721289A5AFC0077DFA9 /* LoginPresenter.swift in Sources */,
