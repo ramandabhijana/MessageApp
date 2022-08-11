@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // Setup initial view controller
     let rootViewController: UIViewController
     // Read from keychain, check if the accessToken exist
-    if let _ = KeychainHelper.shared.readMessageAppTerrarestaAccessToken() {
+    if let _ = KeychainHelper.shared.read(service: AUTH_SERVICE, account: TERRARESTA_ACCOUNT) {
       rootViewController = MainTabViewController.createFromStoryboard()
     } else {
       rootViewController = TopViewController.createFromStoryboard()

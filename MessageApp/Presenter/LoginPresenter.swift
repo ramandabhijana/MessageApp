@@ -41,17 +41,23 @@ class LoginPresenter: LoginPresenterProtocol, RootViewControllerReplacing, APIEr
     TerrarestaAPIClient.performRequest(loginRequest)
       .subscribe(
         onNext: { [weak self] response in
-          let accessTokenData = Data(response.accessToken!.utf8)
-          KeychainHelper.shared.save(accessTokenData) { success in
-            guard success else {
-              self?.viewController?.showAlert(
-                title: "Error",
-                message: SAVE_KEYCHAIN_ERROR)
-              return
+          let authData = LoggedInAuth(
+            accessToken: response.accessToken!,
+            userId: response.userId
+          )
+          KeychainHelper.shared.save(
+            authData,
+            service: AUTH_SERVICE,
+            account: TERRARESTA_ACCOUNT) { success in
+              guard success else {
+                self?.viewController?.showAlert(
+                  title: "Error",
+                  message: SAVE_KEYCHAIN_ERROR)
+                return
+              }
+              // Replace the rootViewController
+              self?.replaceRootViewControllerWithMainTabViewController()
             }
-            // Replace the rootViewController
-            self?.replaceRootViewControllerWithMainTabViewController()
-          }
         },
         onError: { [weak self] error in
           guard let self = self else { return }

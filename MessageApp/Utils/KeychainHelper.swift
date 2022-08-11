@@ -10,12 +10,18 @@ import Foundation
 final class KeychainHelper {
   static let shared = KeychainHelper()
   
-  static let ACCESS_TOKEN_SERVICE = "access-token"
-  static let TERRARESTA_ACCOUNT = "MessageAppTerraresta"
-  
   private init() {}
   
-  func save(_ data: Data, service: String = ACCESS_TOKEN_SERVICE, account: String = TERRARESTA_ACCOUNT, completion: @escaping (Bool) -> Void) {
+  func save<T>(_ data: T, service: String, account: String, completion: @escaping (Bool) -> Void) where T : Codable {
+    do {
+      let encodedData = try JSONEncoder().encode(data)
+      save(encodedData, service: service, account: account, completion: completion)
+    } catch {
+      assertionFailure("Fail to encode item for keychain: \(error)")
+    }
+  }
+  
+  func save(_ data: Data, service: String, account: String, completion: @escaping (Bool) -> Void) {
     let query = [
       kSecValueData: data,
       kSecClass: kSecClassGenericPassword,
@@ -45,10 +51,23 @@ final class KeychainHelper {
     completion(true)
   }
   
-  func readMessageAppTerrarestaAccessToken() -> Data? {
+  func read<T>(service: String, account: String, type: T.Type) -> T? where T : Codable {
+    guard let data = read(service: service, account: account) else {
+      return nil
+    }
+    do {
+      let item = try JSONDecoder().decode(type, from: data)
+      return item
+    } catch {
+      assertionFailure("Fail to decode item for keychain: \(error)")
+      return nil
+    }
+  }
+  
+  func read(service: String, account: String) -> Data? {
     let query = [
-      kSecAttrService: Self.ACCESS_TOKEN_SERVICE,
-      kSecAttrAccount: Self.TERRARESTA_ACCOUNT,
+      kSecAttrService: service,
+      kSecAttrAccount: account,
       kSecClass: kSecClassGenericPassword,
       kSecReturnData: true
     ] as CFDictionary
@@ -57,10 +76,10 @@ final class KeychainHelper {
     return (result as? Data)
   }
   
-  func deleteMessageAppTerrarestaAccessToken() {
+  func delete(service: String, account: String) {
     let query = [
-      kSecAttrService: Self.ACCESS_TOKEN_SERVICE,
-      kSecAttrAccount: Self.TERRARESTA_ACCOUNT,
+      kSecAttrService: service,
+      kSecAttrAccount: account,
       kSecClass: kSecClassGenericPassword,
     ] as CFDictionary
     SecItemDelete(query)

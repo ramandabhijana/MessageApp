@@ -9,5 +9,6 @@ target 'MessageApp' do
   pod 'RxSwift', '~>5'
   pod 'RxCocoa', '~>5'
   pod 'Alamofire'
+  pod 'SDWebImage'
 
 end

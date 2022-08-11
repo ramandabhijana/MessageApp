@@ -19,3 +19,5 @@ let UNSATISFIED_INPUT_ALERT_MESSAGE = "Make sure all are filled in correctly the
 let SAVE_KEYCHAIN_ERROR = "Something went wrong while saving your access token."
 let SUCCESS_STATUS_CODE = 1
 let FAILED_STATUS_CODE = 0
+let AUTH_SERVICE = "access-token-V.1."
+let TERRARESTA_ACCOUNT = "MessageAppTerraresta-V.1."

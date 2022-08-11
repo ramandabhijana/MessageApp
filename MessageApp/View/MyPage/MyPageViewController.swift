@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import Photos
 
 class MyPageViewController: UIViewController {
-  static func createFromStoryboard(presenter: MyPagePresenterProtocol = MyPagePresenter()) -> MyPageViewController {
+  @IBOutlet var navigationBarTitleView: UIView!
+  @IBOutlet weak var nickNameLabel: UILabel!
+  @IBOutlet weak var userIDLabel: UILabel!
+  
+  static func createFromStoryboard(presenter: MyPagePresenterProtocol = MyPagePresenter(dataSource: MyPageDataSource())) -> MyPageViewController {
     let name = String(describing: MyPageViewController.self)
     let storyboard = UIStoryboard(name: name, bundle: nil)
     return storyboard.instantiateViewController(identifier: name) { coder in
@@ -17,8 +22,11 @@ class MyPageViewController: UIViewController {
   }
   
   private static let LOGOUT_BTN_TITLE = "Logout"
+  private static let SEGUE_ID_PROFILE_HEADER = "EmbedProfileHeader"
+  private static let SEGUE_ID_PROFILE_MENU = "EmbedProfileMenu"
   
   private var presenter: MyPagePresenterProtocol
+  private var headerViewControllerIndex: Int!
   
   init?(coder: NSCoder, presenter: MyPagePresenterProtocol) {
     self.presenter = presenter
@@ -32,8 +40,14 @@ class MyPageViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.title = APP_NAME
+    navigationItem.titleView = navigationBarTitleView
     setupLogoutButton()
+    setHeaderViewControllerIndex()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    presenter.fetchData()
   }
   
   private func setupLogoutButton() {
@@ -57,4 +71,88 @@ class MyPageViewController: UIViewController {
               message: "You are about to log out. Continue?",
               actions: actions)
   }
+  
+  private func setHeaderViewControllerIndex() {
+    guard let index = (children.enumerated()
+      .filter { $0.element is ProfileHeaderViewController }
+      .first
+      .map(\.offset))
+    else { return }
+    headerViewControllerIndex = index
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == Self.SEGUE_ID_PROFILE_HEADER {
+      let headerViewController = segue.destination as! ProfileHeaderViewController
+      headerViewController.delegate = self
+    } else if segue.identifier == Self.SEGUE_ID_PROFILE_MENU {
+      let menuViewController = segue.destination as! ProfileMenuViewController
+      menuViewController.delegate = self
+    }
+  }
+  
+  func applyLoadingState() {
+    nickNameLabel.backgroundColor = .placeholderText
+    nickNameLabel.text = "User's Nick Name"
+    nickNameLabel.textColor = .clear
+    userIDLabel.backgroundColor = .placeholderText
+    userIDLabel.text = "User ID"
+    userIDLabel.textColor = .clear
+  }
+  
+  func applyNormalState() {
+    nickNameLabel.backgroundColor = .clear
+    nickNameLabel.textColor = .label
+    userIDLabel.backgroundColor = .clear
+    userIDLabel.textColor = .label
+  }
+  
+  func fetchLibraryAuthStatus(completion: @escaping (Bool) -> Void) {
+    PHPhotoLibrary.fetchAuthorizationStatus(completion: completion)
+  }
 }
+
+
+extension MyPageViewController: ProfileMenuViewControllerDelegate {
+  func didSelectDisplayEmail() {
+    presenter.displayEmailInfo()
+  }
+  
+  func didSelectDisplayPassword() {
+    presenter.displayPassword()
+  }
+  
+  func didSelectTermCondition() {
+    presenter.presentTermCondition()
+  }
+  
+  func didSelectDeleteAccount() {
+    presenter.presentDeleteAccountConfirmation()
+  }
+}
+
+extension MyPageViewController: ProfileHeaderViewControllerDelegate {
+  func didTapProfileImage() {
+    presenter.presentMediaManageViewController(forceShow: false)
+  }
+  
+  func didTapEditProfileButton() {
+    presenter.pushEditProfileViewController()
+  }
+  
+  func profileImageUrlFetched(_ url: URL?) {
+    (children[headerViewControllerIndex] as! ProfileHeaderViewController)
+      .setProfileImage(withURL: url)
+  }
+}
+
+extension MyPageViewController: ReplaceDeleteProfileImageViewControllerDelegate {
+  func didTapSelectImageButton() {
+    presenter.presentMediaManageViewController(forceShow: true)
+  }
+  
+  func didTapDeleteButton() {
+    presenter.deleteProfileImage()
+  }
+}
+
