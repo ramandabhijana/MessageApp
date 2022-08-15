@@ -94,9 +94,6 @@ private extension LoginPresenter {
         self?.viewController?.emailTextField.textFieldState = emailIsValid
           ? .normal
           : .error(message: EMAIL_INCORRECT_FORMAT_MESSAGE)
-        UIView.animate(withDuration: 0.5, animations: {
-          self?.viewController?.view.layoutIfNeeded()
-        }, completion: nil)
       })
       .disposed(by: disposeBag)
     
@@ -107,9 +104,6 @@ private extension LoginPresenter {
         self?.viewController?.passwordTextField.textFieldState = passwordIsValid
           ? .normal
           : .error(message: PASSWORD_INCORRECT_FORMAT_MESSAGE)
-        UIView.animate(withDuration: 0.5, animations: {
-          self?.viewController?.view.layoutIfNeeded()
-        }, completion: nil)
       })
       .disposed(by: disposeBag)
     

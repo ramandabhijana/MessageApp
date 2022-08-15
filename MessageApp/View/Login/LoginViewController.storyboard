@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="39F-Vo-E2v" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="320"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NmE-dB-N03" customClass="InputTextField" customModule="MessageApp" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="16" width="382" height="64"/>
@@ -51,6 +51,7 @@
                                             <constraint firstItem="Pzq-Nz-gPQ" firstAttribute="width" secondItem="NmE-dB-N03" secondAttribute="width" id="BnR-7J-Sk8"/>
                                             <constraint firstItem="NmE-dB-N03" firstAttribute="leading" secondItem="39F-Vo-E2v" secondAttribute="leading" constant="16" id="FjV-wa-qA5"/>
                                             <constraint firstItem="k7I-jE-mdO" firstAttribute="top" secondItem="Pzq-Nz-gPQ" secondAttribute="bottom" constant="100" id="LbC-TD-R7h"/>
+                                            <constraint firstAttribute="bottom" secondItem="k7I-jE-mdO" secondAttribute="bottom" constant="16" id="VNI-Ky-5OL"/>
                                             <constraint firstItem="k7I-jE-mdO" firstAttribute="width" secondItem="Pzq-Nz-gPQ" secondAttribute="width" multiplier="0.8" id="eVa-vg-fEM"/>
                                             <constraint firstItem="Pzq-Nz-gPQ" firstAttribute="top" secondItem="NmE-dB-N03" secondAttribute="bottom" constant="16" id="nde-Ok-YcJ"/>
                                             <constraint firstItem="NmE-dB-N03" firstAttribute="top" secondItem="39F-Vo-E2v" secondAttribute="top" constant="16" id="nfJ-xu-xcy"/>
@@ -64,7 +65,6 @@
                                     <constraint firstItem="39F-Vo-E2v" firstAttribute="top" secondItem="IG4-Wo-xGR" secondAttribute="top" id="aCt-s6-n5k"/>
                                     <constraint firstItem="39F-Vo-E2v" firstAttribute="width" secondItem="ITk-Oq-9d6" secondAttribute="width" id="f3b-bU-y2p"/>
                                     <constraint firstItem="39F-Vo-E2v" firstAttribute="leading" secondItem="IG4-Wo-xGR" secondAttribute="leading" id="rcC-Kk-6or"/>
-                                    <constraint firstItem="39F-Vo-E2v" firstAttribute="height" secondItem="ITk-Oq-9d6" secondAttribute="height" priority="250" id="zw4-fP-ntE"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="IG4-Wo-xGR"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="ITk-Oq-9d6"/>
@@ -93,10 +93,10 @@
     </scenes>
     <designables>
         <designable name="NmE-dB-N03">
-            <size key="intrinsicContentSize" width="24" height="0.5"/>
+            <size key="intrinsicContentSize" width="1.7976931348623157e+308" height="64"/>
         </designable>
         <designable name="Pzq-Nz-gPQ">
-            <size key="intrinsicContentSize" width="24" height="0.5"/>
+            <size key="intrinsicContentSize" width="1.7976931348623157e+308" height="64"/>
         </designable>
     </designables>
     <resources>

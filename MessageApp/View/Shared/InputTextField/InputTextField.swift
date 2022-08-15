@@ -12,7 +12,8 @@ enum InputTextFieldState {
   case error(message: String)
 }
 
-@IBDesignable class InputTextField: UITextField {
+@IBDesignable
+class InputTextField: UITextField {
   
   @IBInspectable
   private let label: UILabel = {
@@ -58,7 +59,16 @@ enum InputTextFieldState {
     }
   }
   
-  private lazy var heightConstraint: NSLayoutConstraint = heightAnchor.constraint(equalToConstant: Self.NORMAL_STATE_HEIGHT)
+  override var intrinsicContentSize: CGSize {
+    let height: CGFloat
+    switch textFieldState {
+    case .error(_):
+      height = Self.NORMAL_STATE_HEIGHT + 15
+    default:
+      height = Self.NORMAL_STATE_HEIGHT
+    }
+    return CGSize(width: .greatestFiniteMagnitude, height: height)
+  }
   
   @IBInspectable
   var fieldName: String = "" {
@@ -91,6 +101,13 @@ enum InputTextFieldState {
 
   }
   
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    if textAreaRectLayer.frame.width != layer.bounds.width {
+      textAreaRectLayer.frame.size.width = layer.bounds.size.width
+    }
+  }
+  
   private func textAreaInsets(bounds: CGRect) -> UIEdgeInsets {
     let textfieldWithLabelHeight = Self.NAME_LABEL_HEIGHT + Self.TEXT_FIELD_HEIGHT
     let topInset = (textfieldWithLabelHeight - bounds.size.height) / 2
@@ -104,44 +121,47 @@ enum InputTextFieldState {
     borderStyle = .none
     autocorrectionType = .no
     
-    var bounds = layer.bounds
-    // Have to increase the height by 20 bcs we'll add padding along vertical axis by 20
-    bounds.size.height += 20
-    // After adding 20, the background layer height will shrink to 44 (Textfield's constant height) and its y coordinate is moved down by 20
-    textAreaRectLayer.frame = bounds.insetBy(dx: 0, dy: 20)
-    layer.addSublayer(textAreaRectLayer)
+    DispatchQueue.main.async { [self] in
+      
+      var bounds = layer.bounds
+      // Have to increase the height by 20 bcs we'll add padding along vertical axis by 20
+      bounds.size.height += 20
+      // After adding 20, the background layer height will shrink to 44 (Textfield's constant height) and its y coordinate is moved down by 20
+      textAreaRectLayer.frame = bounds.insetBy(dx: 0, dy: 20)
+      
+      layer.addSublayer(textAreaRectLayer)
 
-    addSubview(label)
-    addSubview(errorLabel)
-    errorLabel.alpha = 0
-    
-    label.translatesAutoresizingMaskIntoConstraints = false
-    errorLabel.translatesAutoresizingMaskIntoConstraints = false
-    
-    NSLayoutConstraint.activate([
-      label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Self.HORIZONTAL_SPACE),
-      label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Self.HORIZONTAL_SPACE),
-      label.bottomAnchor.constraint(equalTo: topAnchor, constant: 18),
-      heightConstraint,
-      errorLabel.topAnchor.constraint(equalTo: bottomAnchor, constant: -15),
-      errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Self.HORIZONTAL_SPACE),
-      errorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Self.HORIZONTAL_SPACE)
-    ])
+      addSubview(label)
+      addSubview(errorLabel)
+      errorLabel.alpha = 0
+      
+      label.translatesAutoresizingMaskIntoConstraints = false
+      errorLabel.translatesAutoresizingMaskIntoConstraints = false
+      
+      NSLayoutConstraint.activate([
+        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Self.HORIZONTAL_SPACE),
+        label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Self.HORIZONTAL_SPACE),
+        label.bottomAnchor.constraint(equalTo: topAnchor, constant: 18),
+        errorLabel.topAnchor.constraint(equalTo: bottomAnchor, constant: -15),
+        errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Self.HORIZONTAL_SPACE),
+        errorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Self.HORIZONTAL_SPACE)
+      ])
+    }
   }
   
   private func applyErrorAppearance(withMessage errorMessage: String) {
     errorLabel.text = errorMessage
-    heightConstraint.constant = Self.NORMAL_STATE_HEIGHT + 15
-    textAreaRectLayer.borderColor = UIColor.systemRed.cgColor
+    invalidateIntrinsicContentSize()
     UIView.animate(withDuration: Self.ERROR_LABEL_ANIMATION_DURATION, animations: {
+      self.textAreaRectLayer.borderColor = UIColor.systemRed.cgColor
       self.errorLabel.alpha = 1
     }, completion: nil)
   }
   
   private func applyNormalAppearance() {
-    textAreaRectLayer.borderColor = UIColor.systemGray5.cgColor
-    heightConstraint.constant = Self.NORMAL_STATE_HEIGHT
+    invalidateIntrinsicContentSize()
     UIView.animate(withDuration: Self.ERROR_LABEL_ANIMATION_DURATION, animations: {
+      self.textAreaRectLayer.borderColor = UIColor.systemGray5.cgColor
       self.errorLabel.alpha = 0
     }, completion: nil)
   }
