@@ -10,5 +10,7 @@ target 'MessageApp' do
   pod 'RxCocoa', '~>5'
   pod 'Alamofire'
   pod 'SDWebImage'
+  pod 'FittedSheets'
+  pod 'SVProgressHUD'
 
 end

@@ -11,7 +11,6 @@ import Photos
 class MediaManageViewController: UICollectionViewController, UINavigationControllerDelegate {
   private static let ROOT_VC_NAME = "MediaManageNavigationController"
   private static let DECIDE_BTN_TITLE = "Decide"
-  private static let CLOSE_BTN_IMG_NAME = "xmark"
   private static let NAVIGATION_TITLE = "Select Image"
   
   static func createFromStoryboard(presenter: MediaManagePresenterProtocol = MediaManagePresenter()) -> UIViewController {
@@ -43,7 +42,7 @@ class MediaManageViewController: UICollectionViewController, UINavigationControl
     return button
   }()
   private lazy var closeButton = UIBarButtonItem(
-    image: UIImage(systemName: Self.CLOSE_BTN_IMG_NAME),
+    image: UIImage(systemName: CLOSE_BTN_IMG_NAME),
     style: .plain,
     target: self,
     action: #selector(didTapClose)

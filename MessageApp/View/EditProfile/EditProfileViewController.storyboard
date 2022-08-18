@@ -3,7 +3,9 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,32 +13,226 @@
         <!--Edit Profile View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="EditProfileViewController" id="Y6W-OH-hqX" customClass="EditProfileViewController" customModule="MessageApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfileViewController" hidesBottomBarWhenPushed="YES" id="Y6W-OH-hqX" customClass="EditProfileViewController" customModule="MessageApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EditProfileViewController" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQe-oU-L9c">
-                                <rect key="frame" x="36.5" y="428.5" width="341" height="39"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OmT-u4-toJ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qim-KA-Vyg" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="324"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="g5j-Ai-gm6">
+                                                <rect key="frame" x="16" y="16" width="382" height="218"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="firstBaseline" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="llH-N2-mib">
+                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="17.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SN7-Wp-rNB">
+                                                                <rect key="frame" x="0.0" y="0.0" width="187" height="17"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Max. 20 characters" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nuz-vF-uTe">
+                                                                <rect key="frame" x="195" y="-1" width="187" height="18.5"/>
+                                                                <color key="textColor" name="AppOrange"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="firstBaseline" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="G4s-cQ-M4J">
+                                                        <rect key="frame" x="0.0" y="33.5" width="382" height="17.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1C-0G-ELJ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="187" height="17"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="yyyy/MM/dd" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Orw-ih-wEC">
+                                                                <rect key="frame" x="195" y="-1" width="187" height="18.5"/>
+                                                                <color key="textColor" name="AppOrange"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="date-time"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="firstBaseline" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="m7a-R4-C4R">
+                                                        <rect key="frame" x="0.0" y="67" width="382" height="17.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPD-3V-gMj">
+                                                                <rect key="frame" x="0.0" y="0.0" width="187" height="17"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="--" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yy8-g3-56r">
+                                                                <rect key="frame" x="195" y="-1" width="187" height="18.5"/>
+                                                                <color key="textColor" name="AppOrange"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="firstBaseline" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hN0-bR-isj">
+                                                        <rect key="frame" x="0.0" y="100.5" width="382" height="17.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Occupation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdX-q0-LW6">
+                                                                <rect key="frame" x="0.0" y="0.0" width="187" height="17"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="--" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D48-6z-u7o">
+                                                                <rect key="frame" x="195" y="-1" width="187" height="18.5"/>
+                                                                <color key="textColor" name="AppOrange"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="firstBaseline" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZTd-cE-m70">
+                                                        <rect key="frame" x="0.0" y="134" width="382" height="17.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Area" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFW-ho-E2B">
+                                                                <rect key="frame" x="0.0" y="0.0" width="187" height="17"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="--" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tQ5-LA-e2l">
+                                                                <rect key="frame" x="195" y="-1" width="187" height="18.5"/>
+                                                                <color key="textColor" name="AppOrange"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="firstBaseline" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="meD-AX-fRn">
+                                                        <rect key="frame" x="0.0" y="167.5" width="382" height="17"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hobby" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHK-Cx-YEY">
+                                                                <rect key="frame" x="0.0" y="0.0" width="187" height="17"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZT-OU-pwX">
+                                                                <rect key="frame" x="195" y="0.0" width="187" height="17"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <color key="textColor" name="AppOrange"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="firstBaseline" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="k27-XH-oHA">
+                                                        <rect key="frame" x="0.0" y="200.5" width="382" height="17.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mo-Kw-AMZ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="187" height="17"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="--" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0qP-2H-ntu">
+                                                                <rect key="frame" x="195" y="-1" width="187" height="18.5"/>
+                                                                <color key="textColor" name="AppOrange"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Freeword" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucb-sU-E4R">
+                                                <rect key="frame" x="16" y="250" width="60.5" height="17"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uOd-w6-gFz">
+                                                <rect key="frame" x="16" y="275" width="382" height="33"/>
+                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" smartDashesType="no"/>
+                                            </textView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecg-E5-kqH">
+                                                <rect key="frame" x="366.5" y="253.5" width="31.5" height="13.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="uOd-w6-gFz" firstAttribute="leading" secondItem="Qim-KA-Vyg" secondAttribute="leading" constant="16" id="8PC-wO-NvP"/>
+                                            <constraint firstItem="ecg-E5-kqH" firstAttribute="bottom" secondItem="Ucb-sU-E4R" secondAttribute="bottom" id="WOr-2V-DAc"/>
+                                            <constraint firstItem="g5j-Ai-gm6" firstAttribute="leading" secondItem="Qim-KA-Vyg" secondAttribute="leading" constant="16" id="dy6-yr-yej"/>
+                                            <constraint firstAttribute="trailing" secondItem="ecg-E5-kqH" secondAttribute="trailing" constant="16" id="qUb-Xt-5ba"/>
+                                            <constraint firstAttribute="trailing" secondItem="g5j-Ai-gm6" secondAttribute="trailing" constant="16" id="r00-9c-m5B"/>
+                                            <constraint firstItem="uOd-w6-gFz" firstAttribute="top" secondItem="Ucb-sU-E4R" secondAttribute="bottom" constant="8" id="s73-x7-R5g"/>
+                                            <constraint firstItem="Ucb-sU-E4R" firstAttribute="top" secondItem="g5j-Ai-gm6" secondAttribute="bottom" constant="16" id="tlR-75-G8f"/>
+                                            <constraint firstItem="g5j-Ai-gm6" firstAttribute="top" secondItem="Qim-KA-Vyg" secondAttribute="top" constant="16" id="ugU-2u-4Ic"/>
+                                            <constraint firstItem="Ucb-sU-E4R" firstAttribute="leading" secondItem="Qim-KA-Vyg" secondAttribute="leading" constant="16" id="vJY-Rv-wQy"/>
+                                            <constraint firstAttribute="bottom" secondItem="uOd-w6-gFz" secondAttribute="bottom" constant="16" id="wpA-rr-X9I"/>
+                                            <constraint firstAttribute="trailing" secondItem="uOd-w6-gFz" secondAttribute="trailing" constant="16" id="yWJ-1e-TFh"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Qim-KA-Vyg" firstAttribute="leading" secondItem="QhP-xy-Ro6" secondAttribute="leading" id="A7y-pd-1lb"/>
+                                    <constraint firstItem="Qim-KA-Vyg" firstAttribute="trailing" secondItem="QhP-xy-Ro6" secondAttribute="trailing" id="Gaa-Gt-A4r"/>
+                                    <constraint firstItem="Qim-KA-Vyg" firstAttribute="width" secondItem="o1u-8u-MiC" secondAttribute="width" id="JeX-e9-L93"/>
+                                    <constraint firstItem="Qim-KA-Vyg" firstAttribute="top" secondItem="QhP-xy-Ro6" secondAttribute="top" id="enL-VB-UVS"/>
+                                    <constraint firstItem="Qim-KA-Vyg" firstAttribute="bottom" secondItem="QhP-xy-Ro6" secondAttribute="bottom" id="gqd-TN-qGu"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="QhP-xy-Ro6"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="o1u-8u-MiC"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="NQe-oU-L9c" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="Nta-jR-p3V"/>
-                            <constraint firstItem="NQe-oU-L9c" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="aMD-pd-hVo"/>
+                            <constraint firstItem="OmT-u4-toJ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="gJA-KG-ARg"/>
+                            <constraint firstItem="OmT-u4-toJ" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="kCx-pe-L5u"/>
+                            <constraint firstItem="OmT-u4-toJ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="nNd-Mn-XPN"/>
+                            <constraint firstItem="OmT-u4-toJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="o9f-Fy-Omx"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="areaTextField" destination="tQ5-LA-e2l" id="oBT-4B-2Y1"/>
+                        <outlet property="birthdayTextField" destination="Orw-ih-wEC" id="s2z-bC-Us6"/>
+                        <outlet property="characterTextField" destination="0qP-2H-ntu" id="quD-mw-AH2"/>
+                        <outlet property="freewordCharacterCounterLabel" destination="ecg-E5-kqH" id="kqy-RB-t42"/>
+                        <outlet property="freewordTextView" destination="uOd-w6-gFz" id="E0v-FQ-juR"/>
+                        <outlet property="genderTextField" destination="Yy8-g3-56r" id="xht-0E-IBE"/>
+                        <outlet property="hobbyLabel" destination="0ZT-OU-pwX" id="dM8-Tu-Bdm"/>
+                        <outlet property="nickNameFieldLabel" destination="SN7-Wp-rNB" id="bKo-vW-0iF"/>
+                        <outlet property="nicknameTextField" destination="nuz-vF-uTe" id="q7r-2N-vPt"/>
+                        <outlet property="occupationTextField" destination="D48-6z-u7o" id="Ay0-Rm-iVc"/>
+                        <outlet property="scrollView" destination="OmT-u4-toJ" id="iDn-c5-B4a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-25" y="84"/>
+            <point key="canvasLocation" x="-26.086956521739133" y="83.705357142857139"/>
         </scene>
     </scenes>
     <resources>
+        <namedColor name="AppOrange">
+            <color red="0.8901960784313725" green="0.43529411764705883" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

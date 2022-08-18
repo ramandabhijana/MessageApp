@@ -61,7 +61,6 @@ class SignUpViewController: UIViewController {
   }
   
   private func setupNameTextFieldCharacterLimiter() {
-    let MAX_CHARACTER_COUNT_FOR_NAME = 20
     userNameTextField.rx.controlEvent(.editingChanged)
       .subscribe(onNext: { [weak self] in
         guard let text = self?.userNameTextField.text else { return }

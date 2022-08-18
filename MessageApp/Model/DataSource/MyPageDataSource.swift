@@ -10,6 +10,7 @@ import RxSwift
 
 protocol MyPageDataSourceProtocol {
   func fetchProfile() -> Observable<ProfileResponse>
+  var profile: ProfileResponse? { get }
   var profileImageURL: URL? { get }
   var email: String? { get }
   var password: String? { get }
@@ -18,7 +19,7 @@ protocol MyPageDataSourceProtocol {
 }
 
 class MyPageDataSource: MyPageDataSourceProtocol {
-  private var profile: ProfileResponse?
+  var profile: ProfileResponse?
   private var profileUnwrapped: ProfileResponse {
     guard let profile = profile else {
       fatalError("profile is nil. Please call `fetchProfile() -> Observable<String?>` first")

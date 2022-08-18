@@ -20,20 +20,20 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="39F-Vo-E2v" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="320"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="260"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NmE-dB-N03" customClass="InputTextField" customModule="MessageApp" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="16" width="382" height="64"/>
+                                                <rect key="frame" x="16" y="16" width="382" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pzq-Nz-gPQ" customClass="InputTextField" customModule="MessageApp" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="96" width="382" height="64"/>
+                                                <rect key="frame" x="16" y="66" width="382" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7I-jE-mdO" customClass="FormSubmitButton" customModule="MessageApp" customModuleProvider="target">
-                                                <rect key="frame" x="54" y="260" width="306" height="44"/>
+                                                <rect key="frame" x="54" y="200" width="306" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="TeM-aU-19S"/>
                                                 </constraints>
@@ -93,10 +93,10 @@
     </scenes>
     <designables>
         <designable name="NmE-dB-N03">
-            <size key="intrinsicContentSize" width="1.7976931348623157e+308" height="64"/>
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
         <designable name="Pzq-Nz-gPQ">
-            <size key="intrinsicContentSize" width="1.7976931348623157e+308" height="64"/>
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
     </designables>
     <resources>

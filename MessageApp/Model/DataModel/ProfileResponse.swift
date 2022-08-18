@@ -10,21 +10,22 @@ import Foundation
 struct ProfileResponse: Decodable {
   let status: Int
   let userId: Int
-  let nickname: String
+  var nickname: String?
   let imageId: Int
   let imageSize: String?
   let imageUrl: String?
-  let gender: Int?
+  var gender: Int?
   let age: Int?
-  let job: Int?
-  let residence: String?
-  let personality: Int?
-  let hobby: String?
-  let aboutMe: String?
+  var job: Int?
+  var residence: String?
+  var personality: Int?
+  var hobby: String?
+  var aboutMe: String?
   let userStatus: Int
   let email: String?
   let password: String?
   let error: ErrorResponse?
+  var birthday: String?
   
   var userStatusDescription: String {
     switch userStatus {
@@ -36,5 +37,19 @@ struct ProfileResponse: Decodable {
   
   var hasProfileImage: Bool {
     imageId != 0
+  }
+}
+
+extension ProfileResponse: Equatable {
+  static func == (lhs: ProfileResponse, rhs: ProfileResponse) -> Bool {
+    lhs.userId == rhs.userId
+    && lhs.nickname == rhs.nickname
+    && lhs.birthday == rhs.birthday
+    && lhs.gender == rhs.gender
+    && lhs.job == rhs.job
+    && lhs.residence == rhs.residence
+    && lhs.hobby == rhs.hobby
+    && lhs.personality == rhs.personality
+    && lhs.aboutMe == rhs.aboutMe
   }
 }

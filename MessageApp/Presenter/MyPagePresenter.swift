@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import FittedSheets
 
 protocol MyPagePresenterProtocol {
   var viewController: MyPageViewController? { get set }
@@ -92,12 +93,11 @@ class MyPagePresenter: MyPagePresenterProtocol, RootViewControllerReplacing, API
           // Show bottom sheet
           let replaceDeleteViewController = ReplaceDeleteProfileImageViewController.createFromStoryboard()
           replaceDeleteViewController.delegate = self.viewController
-          if let sheet = replaceDeleteViewController.sheetPresentationController {
-            sheet.detents = [.medium()]
-            sheet.prefersEdgeAttachedInCompactHeight = true
-            sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
-          }
-          self.viewController?.present(replaceDeleteViewController, animated: true, completion: nil)
+          let sheetOptions = SheetOptions(pullBarHeight: 16, presentingViewCornerRadius: .zero, shouldExtendBackground: true, setIntrinsicHeightOnNavigationControllers: false, useFullScreenMode: false, shrinkPresentingViewController: false, useInlineMode: false, horizontalPadding: 0, maxWidth: nil)
+          let sheetController = SheetViewController(controller: replaceDeleteViewController,
+                                                    sizes: [.fixed(250)],
+                                                    options: sheetOptions)
+          self.viewController?.present(sheetController, animated: true, completion: nil)
         } else {
           let viewController = UINavigationController(rootViewController: MediaManageViewController.createFromStoryboard())
           viewController.modalPresentationStyle = .fullScreen
@@ -108,8 +108,11 @@ class MyPagePresenter: MyPagePresenterProtocol, RootViewControllerReplacing, API
   }
   
   func pushEditProfileViewController() {
+    guard let profile = dataSource.profile else { return }
+    let editDataSource = EditProfileDataSource(profile: profile)
+    let editPresenter = EditProfilePresenter(dataSource: editDataSource)
     viewController?.navigationController?.pushViewController(
-      EditProfileViewController.createFromStoryboard(),
+      EditProfileViewController.createFromStoryboard(presenter: editPresenter),
       animated: true)
   }
   

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20037"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Selection View Controller-->
+        <scene sceneID="iVP-2c-ZMW">
+            <objects>
+                <tableViewController storyboardIdentifier="SelectionViewController" id="FEi-CQ-nNA" customClass="SelectionViewController" customModule="MessageApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="kyb-jT-jSq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectionCell" id="Dhn-e9-5o9" customClass="SelectionCell" customModule="MessageApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dhn-e9-5o9" id="HxZ-14-Kkh">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIV-SQ-6hA">
+                                            <rect key="frame" x="28" y="11" width="41.5" height="21.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="tintColor" name="AppGreen"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="PIV-SQ-6hA" secondAttribute="bottom" id="DqK-Bx-bIB"/>
+                                        <constraint firstItem="PIV-SQ-6hA" firstAttribute="top" secondItem="HxZ-14-Kkh" secondAttribute="topMargin" id="FOO-SG-bXn"/>
+                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="PIV-SQ-6hA" secondAttribute="trailing" constant="16" id="KzR-L7-dgn"/>
+                                        <constraint firstItem="PIV-SQ-6hA" firstAttribute="leading" secondItem="HxZ-14-Kkh" secondAttribute="leadingMargin" constant="8" id="yha-hl-90w"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="PIV-SQ-6hA" id="g8P-8O-sfj"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="FEi-CQ-nNA" id="tNw-M8-Dew"/>
+                            <outlet property="delegate" destination="FEi-CQ-nNA" id="y0H-cb-ALU"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="RLn-KK-Hgd">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="xmark" catalog="system" id="mqP-C7-SUO">
+                            <color key="tintColor" name="AccentColor"/>
+                            <connections>
+                                <action selector="didTapCloseButton:" destination="FEi-CQ-nNA" id="E87-yv-tIF"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Decide" style="done" id="IY8-03-a73">
+                            <color key="tintColor" name="AppGreen"/>
+                            <connections>
+                                <action selector="didTapDecideButton:" destination="FEi-CQ-nNA" id="iVV-gj-ghG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bL6-nQ-f66" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2594.202898550725" y="82.366071428571431"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="AppGreen">
+            <color red="0.36862745098039218" green="0.67843137254901964" blue="0.086274509803921567" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

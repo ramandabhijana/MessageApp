@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>occupation</key>
+	<array>
+		<string>Unselected_0</string>
+		<string>Scientist_1</string>
+		<string>Repairman_2</string>
+		<string>Soldier_3</string>
+		<string>Secretary_4</string>
+		<string>Doorman_5</string>
+		<string>Surgeon_6</string>
+		<string>Student_7</string>
+		<string>American football player_8</string>
+		<string>Businessman_9</string>
+		<string>Doctor_10</string>
+		<string>Electrician_11</string>
+		<string>Nurse_12</string>
+		<string>Train conductor_13</string>
+		<string>Dentist_14</string>
+		<string>Paramedic_15</string>
+		<string>Housewife_16</string>
+		<string>Journalist_17</string>
+		<string>Salesman_18</string>
+		<string>Waiter_19</string>
+		<string>Cameraman_20</string>
+		<string>Architect_21</string>
+		<string>Carpenter_22</string>
+		<string>Engineer_23</string>
+		<string>Fireman_24</string>
+		<string>Flight attendant_25</string>
+		<string>Farmer_26</string>
+		<string>Builder_26</string>
+		<string>Footballer_28</string>
+		<string>Gardener_29</string>
+		<string>Housekeeper_30</string>
+		<string>Clown_31</string>
+		<string>Lunchroom supervisor_32</string>
+		<string>Lifeguard_33</string>
+		<string>Magician_34</string>
+		<string>Librarian_35</string>
+		<string>Pirate_36</string>
+		<string>Singer_37</string>
+		<string>Mechanic_38</string>
+		<string>Painter_39</string>
+		<string>Catholic nun_40</string>
+		<string>Pilot_41</string>
+		<string>Photographer_42</string>
+		<string>Postman_43</string>
+		<string>Police officer_44</string>
+		<string>Professor_45</string>
+		<string>Construction worker_46</string>
+		<string>Reporter_47</string>
+	</array>
+	<key>gender</key>
+	<array>
+		<string>Unselected_0</string>
+		<string>Male_1</string>
+		<string>Female_2</string>
+	</array>
+  <key>area</key>
+  <array>
+    <string>Unselected</string>
+    <string>Alabama</string>
+    <string>Alaska</string>
+    <string>Arizona</string>
+    <string>Arkansas</string>
+    <string>California</string>
+    <string>Colorado</string>
+    <string>Connecticut</string>
+    <string>Delaware</string>
+    <string>Florida</string>
+    <string>Georgia</string>
+    <string>Hawaii</string>
+    <string>Idaho</string>
+    <string>Illinois Indiana</string>
+    <string>Iowa</string>
+    <string>Kansas</string>
+    <string>Kentucky</string>
+    <string>Louisiana</string>
+    <string>Maine</string>
+    <string>Maryland</string>
+    <string>Massachusetts</string>
+    <string>Michigan</string>
+    <string>Minnesota</string>
+    <string>Mississippi</string>
+    <string>Missouri</string>
+    <string>Montana Nebraska</string>
+    <string>Nevada</string>
+    <string>New Hampshire</string>
+    <string>New Jersey</string>
+    <string>New Mexico</string>
+    <string>New York</string>
+    <string>North Carolina</string>
+    <string>North Dakota</string>
+    <string>Ohio</string>
+    <string>Oklahoma</string>
+    <string>Oregon</string>
+    <string>Pennsylvania Rhode Island</string>
+    <string>South Carolina</string>
+    <string>South Dakota</string>
+    <string>Tennessee</string>
+    <string>Texas</string>
+    <string>Utah</string>
+    <string>Vermont</string>
+    <string>Virginia</string>
+    <string>Washington</string>
+    <string>West Virginia</string>
+    <string>Wisconsin</string>
+    <string>Wyoming</string>
+  </array>
+  <key>hobby</key>
+  <array>
+    <string>Unselected_0</string>
+    <string>Reading_1</string>
+    <string>Traveling_2</string>
+    <string>Fishing_3</string>
+    <string>Crafting_4</string>
+    <string>Collecting_5</string>
+    <string>Gardening_6</string>
+    <string>Yoga_7</string>
+    <string>Cooking_8</string>
+    <string>Painting_9</string>
+    <string>Knitting_10</string>
+  </array>
+  <key>character</key>
+  <array>
+    <string>Unselected_0</string>
+    <string>Honest_1</string>
+    <string>Brave_2</string>
+    <string>Compassionate_3</string>
+    <string>Leader_4</string>
+    <string>Courageous_5</string>
+    <string>Unselfish_6</string>
+    <string>Loyal_7</string>
+    <string>Hard-working_8</string>
+    <string>Independent_9</string>
+    <string>Selfish_10</string>
+    <string>Responsible_11</string>
+    <string>Considerate_12</string>
+    <string>Self-confident_13</string>
+    <string>Humble_14</string>
+  </array>
+</dict>
+</plist>
