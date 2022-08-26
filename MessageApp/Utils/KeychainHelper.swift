@@ -12,16 +12,16 @@ final class KeychainHelper {
   
   private init() {}
   
-  func save<T>(_ data: T, service: String, account: String, completion: @escaping (Bool) -> Void) where T : Codable {
+  func save<T>(_ data: T, service: String, account: String) where T : Codable {
     do {
       let encodedData = try JSONEncoder().encode(data)
-      save(encodedData, service: service, account: account, completion: completion)
+      save(encodedData, service: service, account: account)
     } catch {
       assertionFailure("Fail to encode item for keychain: \(error)")
     }
   }
   
-  func save(_ data: Data, service: String, account: String, completion: @escaping (Bool) -> Void) {
+  func save(_ data: Data, service: String, account: String) {
     let query = [
       kSecValueData: data,
       kSecClass: kSecClassGenericPassword,
@@ -41,14 +41,6 @@ final class KeychainHelper {
       let attributesToUpdate = [kSecValueData: data] as CFDictionary
       SecItemUpdate(query, attributesToUpdate)
     }
-    
-    guard status == errSecSuccess else {
-      print("Error with status: \(status)")
-      completion(false)
-      return
-    }
-    
-    completion(true)
   }
   
   func read<T>(service: String, account: String, type: T.Type) -> T? where T : Codable {

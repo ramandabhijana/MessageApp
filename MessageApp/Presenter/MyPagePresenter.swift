@@ -23,7 +23,7 @@ protocol MyPagePresenterProtocol {
   func deleteProfileImage()
 }
 
-class MyPagePresenter: MyPagePresenterProtocol, RootViewControllerReplacing, APIErrorHandling {
+class MyPagePresenter: MyPagePresenterProtocol, RootViewControllerReplacing {
   weak var viewController: MyPageViewController?
   
   private let dataSource: MyPageDataSourceProtocol
@@ -41,8 +41,7 @@ class MyPagePresenter: MyPagePresenterProtocol, RootViewControllerReplacing, API
   
   func logout() {
     // Delete token and replace root view controller
-    KeychainHelper.shared.delete(service: AUTH_SERVICE,
-                                 account: TERRARESTA_ACCOUNT)
+    AuthManager.logout()
     replaceRootViewControllerWithTopViewController()
   }
   
@@ -80,12 +79,13 @@ class MyPagePresenter: MyPagePresenterProtocol, RootViewControllerReplacing, API
     // Check whether show mediamanage or not
     viewController?.fetchLibraryAuthStatus { authorized in
       DispatchQueue.main.async { [weak self] in
-        guard let self = self else { return }
+        guard let self = self, let viewController = self.viewController else { return }
         
         guard authorized else {
           self.viewController?.showAlert(
-            title: "Gallery permission denied",
-            message: "You can still change the permission on your device's settings")
+            title: GALLERY_PERMISSION_DENIED,
+            message: PERMISSION_DENIED_MESSAGE,
+            actions: [viewController.openSettingsAction()])
           return
         }
         
@@ -117,39 +117,34 @@ class MyPagePresenter: MyPagePresenterProtocol, RootViewControllerReplacing, API
   }
   
   func deleteProfileImage() {
-    let token = KeychainHelper.shared.read(
-      service: AUTH_SERVICE,
-      account: TERRARESTA_ACCOUNT,
-      type: LoggedInAuth.self)!.accessToken
-    let deleteRequest = DeleteProfilePictureRequest(accessToken: token, imageId: dataSource.imageID)
+    let token = AuthManager.accessToken
+    if case .failure(let error) = token {
+      viewController?.showError(error)
+    }
+    guard case .success(let accessToken) = token else { return }
+    
+    let deleteRequest = DeleteProfilePictureRequest(accessToken: accessToken, imageId: dataSource.imageID)
     TerrarestaAPIClient.performRequest(deleteRequest)
       .subscribeOn(MainScheduler.instance)
       .subscribe(
         onNext: { [weak self] _ in
           self?.fetchData()
         },
-        onError: onError(_:)
+        onError:{ [weak self] error in
+          self?.viewController?.showError(error)
+        }
       )
       .disposed(by: disposeBag)
   }
   
   private func deleteAccountHandler(_ action: UIAlertAction) {
     // Make API call, delete session, then show TopVC
-    let token = KeychainHelper.shared.read(
-      service: AUTH_SERVICE,
-      account: TERRARESTA_ACCOUNT,
-      type: LoggedInAuth.self)!.accessToken
-    let request = DeleteAccountRequest(accessToken: token)
-    TerrarestaAPIClient.performRequest(request)
-      .subscribe(
-        onNext: { [weak self] _ in
-          KeychainHelper.shared.delete(
-            service: AUTH_SERVICE,
-            account: TERRARESTA_ACCOUNT)
-          self?.replaceRootViewControllerWithTopViewController()
-        },
-        onError: onError(_:)
-      )
+    AuthManager.deleteAccount()
+      .subscribe(onNext: { [weak self] _ in
+        self?.replaceRootViewControllerWithTopViewController()
+      }, onError: { [weak self] error in
+        self?.viewController?.showError(error)
+      })
       .disposed(by: disposeBag)
   }
 }
@@ -167,16 +162,10 @@ extension MyPagePresenter {
           self.viewController?.userIDLabel.text = "#ID: \(profile.userId)"
           self.loading = false
         },
-        onError: onError(_:)
+        onError: { [weak self] error in
+          self?.viewController?.showError(error)
+        }
       )
       .disposed(by: disposeBag)
-  }
-  
-  private func onError(_ error: Error) {
-    if let apiError = error as? APIError {
-      viewController?.showError(content: getErrorTitleAndMessage(forError: apiError))
-      return
-    }
-    viewController?.showError(content: ("Error", error.localizedDescription))
   }
 }

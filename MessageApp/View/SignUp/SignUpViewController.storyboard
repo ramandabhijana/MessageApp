@@ -102,13 +102,13 @@
     </scenes>
     <designables>
         <designable name="GK4-kY-Tca">
-            <size key="intrinsicContentSize" width="24" height="0.5"/>
+            <size key="intrinsicContentSize" width="1.7976931348623157e+308" height="64"/>
         </designable>
         <designable name="Icb-Gc-INA">
-            <size key="intrinsicContentSize" width="24" height="0.5"/>
+            <size key="intrinsicContentSize" width="1.7976931348623157e+308" height="64"/>
         </designable>
         <designable name="OaD-zU-Mzj">
-            <size key="intrinsicContentSize" width="24" height="0.5"/>
+            <size key="intrinsicContentSize" width="1.7976931348623157e+308" height="64"/>
         </designable>
     </designables>
     <resources>

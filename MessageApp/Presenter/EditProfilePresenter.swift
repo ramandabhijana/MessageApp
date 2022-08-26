@@ -34,7 +34,7 @@ protocol EditProfilePresenterProtocol {
   func dismissViewController()
 }
 
-class EditProfilePresenter: EditProfilePresenterProtocol, APIErrorHandling {
+class EditProfilePresenter: EditProfilePresenterProtocol {
   weak var viewController: EditProfileViewController?
   
   var dataSource: EditProfileDataSource
@@ -69,7 +69,8 @@ class EditProfilePresenter: EditProfilePresenterProtocol, APIErrorHandling {
     return area.values.first!.name
   }
   var hobby: String {
-    dataSource.allHobbiesString
+    let hobbies = dataSource.allHobbiesString
+    return hobbies.isEmpty ? "--" : hobbies
   }
   var character: String {
     guard let character = dataSource.personality,
@@ -107,6 +108,7 @@ class EditProfilePresenter: EditProfilePresenterProtocol, APIErrorHandling {
   
   func setNickname(name: String) {
     dataSource.nickname = name
+    viewController?.saveButton.isEnabled = !name.isEmpty
   }
   
   func setBirthdayDate(date: Date?) {
@@ -162,11 +164,15 @@ class EditProfilePresenter: EditProfilePresenterProtocol, APIErrorHandling {
       return
     }
     loading = true
-    guard let auth = KeychainHelper.shared.read(service: AUTH_SERVICE, account: TERRARESTA_ACCOUNT, type: LoggedInAuth.self) else {
-      fatalError("Missing auth data")
+    
+    let token = AuthManager.accessToken
+    if case .failure(let error) = token {
+      viewController?.showError(error)
     }
+    guard case .success(let accessToken) = token else { return }
+    
     let editRequest = EditProfileRequest(
-      accessToken: auth.accessToken,
+      accessToken: accessToken,
       nickname: dataSource.nickname,
       birthday: dataSource.birthday,
       residence: dataSource.residence?.values.first?.name ?? "",
@@ -190,12 +196,8 @@ class EditProfilePresenter: EditProfilePresenterProtocol, APIErrorHandling {
             ])
         },
         onError: { [weak self] error in
-          guard let self = self else { return }
-          self.viewController?.applyNormalAppearance()
-          if let apiError = error as? APIError {
-            self.viewController?.showError(content: self.getErrorTitleAndMessage(forError: apiError))
-            return
-          }
+          self?.viewController?.applyNormalAppearance()
+          self?.viewController?.showError(error)
         }
       )
       .disposed(by: disposeBag)

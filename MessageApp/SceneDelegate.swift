@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Nuke
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -14,10 +15,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     window = UIWindow(windowScene: windowScene)
+    
+    // Set up cache
+    DataLoader.sharedUrlCache.diskCapacity = .zero
+    
+    let pipeline = ImagePipeline { config in
+      let dataCache = try? DataCache(name: APP_NAME)
+      dataCache?.sizeLimit = 200 * 1024 * 1024 // 200MB
+      config.dataCache = dataCache
+    }
+    
+    ImagePipeline.shared = pipeline
+    
     // Setup initial view controller
     let rootViewController: UIViewController
-    // Read from keychain, check if the accessToken exist
-    if let _ = KeychainHelper.shared.read(service: AUTH_SERVICE, account: TERRARESTA_ACCOUNT) {
+    if AuthManager.userExist {
       rootViewController = MainTabViewController.createFromStoryboard()
     } else {
       rootViewController = TopViewController.createFromStoryboard()

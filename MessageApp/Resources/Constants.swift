@@ -5,7 +5,7 @@
 //  Created by Abhijana Agung Ramanda on 01/08/22.
 //
 
-import Foundation
+import UIKit
 
 let APP_NAME = "Training App"
 let REGISTRY_BUTTON_TITLE = "Registry"
@@ -28,3 +28,9 @@ let MAX_CHARACTER_COUNT_FOR_NAME = 20
 let MAX_FREEWORD_COUNT = 200
 let HOBBY_SEPARATOR = ","
 let UNSELECTED_INDEX = 0
+let CAMERA_PERMISSION_DENIED = "Camera permission denied"
+let GALLERY_PERMISSION_DENIED = "Gallery permission denied"
+let PERMISSION_DENIED_MESSAGE = "You can change the permission on your device settings"
+let IS_LOGGED_IN_KEY = "isLoggedIn"
+let UNSUBSCRIBED_STATUS_CODE = 16
+let INFINITE_SCROLL_INDICATOR_HEIGHT: CGFloat = 60.0

@@ -21,11 +21,26 @@ extension UIViewController {
               message: UNSATISFIED_INPUT_ALERT_MESSAGE)
   }
   
-  func showError(content: (title: String, message: String?)) {
-    showAlert(title: content.title, message: content.message)
+  func showError(_ error: Error) {
+    if let error = error as? CustomError {
+      showAlert(title: error.title, message: error.message)
+      return
+    }
+    showAlert(title: "Error", message: error.localizedDescription)
   }
   
   var canPresentCamera: Bool {
     return UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera)
+  }
+  
+  func openSettingsAction(didFinishOpeningURL: (() -> Void)? = nil) -> UIAlertAction {
+    UIAlertAction(title: "Settings", style: .default) { _ in
+      guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+      if UIApplication.shared.canOpenURL(settingsUrl) {
+        UIApplication.shared.open(settingsUrl, options: [:]) { success in
+          if success { didFinishOpeningURL?() }
+        }
+      }
+    }
   }
 }

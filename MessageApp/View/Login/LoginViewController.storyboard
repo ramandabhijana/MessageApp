@@ -20,20 +20,20 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="39F-Vo-E2v" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="260"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="320"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NmE-dB-N03" customClass="InputTextField" customModule="MessageApp" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="16" width="382" height="34"/>
+                                                <rect key="frame" x="16" y="16" width="382" height="64"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pzq-Nz-gPQ" customClass="InputTextField" customModule="MessageApp" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="66" width="382" height="34"/>
+                                                <rect key="frame" x="16" y="96" width="382" height="64"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7I-jE-mdO" customClass="FormSubmitButton" customModule="MessageApp" customModuleProvider="target">
-                                                <rect key="frame" x="54" y="200" width="306" height="44"/>
+                                                <rect key="frame" x="54" y="260" width="306" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="TeM-aU-19S"/>
                                                 </constraints>
@@ -73,9 +73,9 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="t08-si-2vk" secondAttribute="trailing" id="1py-xn-plm"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="t08-si-2vk" secondAttribute="trailing" id="1py-xn-plm"/>
                             <constraint firstItem="t08-si-2vk" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="A2A-4b-COv"/>
-                            <constraint firstItem="t08-si-2vk" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="tk4-o2-WrO"/>
+                            <constraint firstItem="t08-si-2vk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="tk4-o2-WrO"/>
                             <constraint firstItem="t08-si-2vk" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="v8j-XD-UHW"/>
                         </constraints>
                     </view>
@@ -93,10 +93,10 @@
     </scenes>
     <designables>
         <designable name="NmE-dB-N03">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="1.7976931348623157e+308" height="64"/>
         </designable>
         <designable name="Pzq-Nz-gPQ">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="1.7976931348623157e+308" height="64"/>
         </designable>
     </designables>
     <resources>

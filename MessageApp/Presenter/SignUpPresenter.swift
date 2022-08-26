@@ -16,7 +16,7 @@ protocol SignUpPresenterProtocol {
   func submitForm()
 }
 
-class SignUpPresenter: SignUpPresenterProtocol, RootViewControllerReplacing, APIErrorHandling {
+class SignUpPresenter: SignUpPresenterProtocol, RootViewControllerReplacing {
   weak var viewController: SignUpViewController?
   
   private(set) var canSubmitForm: Bool = false
@@ -40,48 +40,21 @@ class SignUpPresenter: SignUpPresenterProtocol, RootViewControllerReplacing, API
       return
     }
     viewController?.registryButton.showLoading()
-    // make API request
-    let registryRequest = RegistryRequest(
+    AuthManager.signup(
+      nickname: (viewController?.userNameTextField.text)!,
       email: (viewController?.emailTextField.text)!,
-      password: (viewController?.passwordTextField.text)!,
-      nickname: (viewController?.userNameTextField.text)!
+      password: (viewController?.passwordTextField.text)!
     )
-    TerrarestaAPIClient.performRequest(registryRequest)
-      .subscribe(
-        onNext: { [weak self] response in
-          // Save access token
-          let authData = LoggedInAuth(
-            accessToken: response.accessToken!,
-            userId: response.userId
-          )
-          KeychainHelper.shared.save(
-            authData,
-            service: AUTH_SERVICE,
-            account: TERRARESTA_ACCOUNT) { success in
-              guard success else {
-                self?.viewController?.showAlert(
-                  title: "Error",
-                  message: SAVE_KEYCHAIN_ERROR)
-                return
-              }
-              // Replace the rootViewController
-              self?.replaceRootViewControllerWithMainTabViewController()
-            }
-        },
-        onError: { [weak self] error in
-          guard let self = self else { return }
-          var titleMessage: (String, String?) = ("Error", nil)
-          if let apiError = error as? APIError {
-            titleMessage = self.getErrorTitleAndMessage(forError: apiError)
-          }
-          self.viewController?.showAlert(title: titleMessage.0, message: titleMessage.1)
-          self.viewController?.registryButton.enable()
-        },
-        onCompleted: {
-          print("\nRegistry request completed\n")
-        }
-      )
-      .disposed(by: disposeBag)
+    .subscribe(
+      onNext: { [weak self] _ in
+        self?.replaceRootViewControllerWithMainTabViewController()
+      },
+      onError: { [weak self] error in
+        self?.viewController?.showError(error)
+        self?.viewController?.registryButton.enable()
+      }
+    )
+    .disposed(by: disposeBag)
   }
   
   private func setupInputFieldValidation(

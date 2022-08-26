@@ -232,7 +232,6 @@ class EditProfileViewController: UIViewController {
     nicknameTextField.rx.text.orEmpty
       .map { String($0.prefix(MAX_CHARACTER_COUNT_FOR_NAME)) }
       .do(onNext: { [unowned self] text in
-        saveButton.isEnabled = !text.isEmpty
         presenter.setNickname(name: text)
       })
       .bind(to: nicknameTextField.rx.text)

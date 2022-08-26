@@ -20,7 +20,7 @@ protocol MediaManagePresenterProtocol {
   func upload(imageData: Data)
 }
 
-class MediaManagePresenter: MediaManagePresenterProtocol, APIErrorHandling {
+class MediaManagePresenter: MediaManagePresenterProtocol {
   weak var viewController: MediaManageViewController?
   
   var selectedPhotoIndexPath: IndexPath? = nil {
@@ -48,14 +48,17 @@ class MediaManagePresenter: MediaManagePresenterProtocol, APIErrorHandling {
       return
     }
     guard viewController.canPresentCamera else {
-      viewController.showError(content: ("Error", "This device doesn't equip with camera."))
+      viewController.showAlert(title: "Error", message: "This device doesn't equip with camera.")
       return
     }
     viewController.fetchCameraPermissionStatus { [weak self] granted in
-      guard let self = self else { return }
+      guard let self = self, let viewController = self.viewController else { return }
       
       guard granted else {
-        self.viewController?.showAlert(title: "Camera permission denied", message: "You can change the permission on your device settings")
+        viewController.showAlert(
+          title: CAMERA_PERMISSION_DENIED,
+          message: PERMISSION_DENIED_MESSAGE,
+          actions: [viewController.openSettingsAction()])
         return
       }
       viewController.presentCamera()
@@ -69,10 +72,14 @@ class MediaManagePresenter: MediaManagePresenterProtocol, APIErrorHandling {
   
   func upload(imageData: Data) {
     loading = true
-    guard let auth = KeychainHelper.shared.read(service: AUTH_SERVICE, account: TERRARESTA_ACCOUNT, type: LoggedInAuth.self) else {
-      fatalError("Missing auth data")
+    
+    let token = AuthManager.accessToken
+    if case .failure(let error) = token {
+      viewController?.showError(error)
     }
-    let uploadRequest = ImageUploadRequest(accessToken: auth.accessToken, location: .profile, imageData: imageData)
+    guard case .success(let accessToken) = token else { return }
+    
+    let uploadRequest = ImageUploadRequest(accessToken: accessToken, location: .profile, imageData: imageData)
     TerrarestaAPIClient.performRequest(uploadRequest)
       .subscribe(
         onNext: { [weak self] response in
@@ -89,13 +96,8 @@ class MediaManagePresenter: MediaManagePresenterProtocol, APIErrorHandling {
           }
         },
         onError: { [weak self] error in
-          guard let self = self else { return }
-          self.viewController?.applyNormalAppearance()
-          if let apiError = error as? APIError {
-            self.viewController?.showError(content: self.getErrorTitleAndMessage(forError: apiError))
-            return
-          }
-          
+          self?.viewController?.applyNormalAppearance()
+          self?.viewController?.showError(error)
         }
       )
       .disposed(by: disposeBag)

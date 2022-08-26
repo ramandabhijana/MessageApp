@@ -11,6 +11,8 @@ target 'MessageApp' do
   pod 'Alamofire'
   pod 'SDWebImage'
   pod 'FittedSheets'
-  pod 'SVProgressHUD'
+  pod 'CHTCollectionViewWaterfallLayout'
+  pod 'Nuke'
+  pod 'NukeUI'
 
 end

@@ -81,10 +81,3 @@ enum HTTPMethod: String {
   case PUT
   case DELETE
 }
-
-enum APIError: Error {
-  case requestFailed(statusCode: Int)
-  case postProcessingFailed(Error)
-  case noData
-  case badResponse(ErrorResponse)
-}
