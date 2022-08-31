@@ -116,4 +116,10 @@ extension SelectionDataSource {
     let listItems = decodedList.asProfileList
     return [itemID: listItems[itemID]]
   }
+  
+  static func itemForItemId<T: Decodable & ProfileListItemConvertible>(_ itemId: Int, type: T.Type) -> ProfileListItem? {
+    let decodedList: T = decodePlistFile()
+    let listItems = decodedList.asProfileList
+    return listItems.first { $0.id == itemId }
+  }
 }

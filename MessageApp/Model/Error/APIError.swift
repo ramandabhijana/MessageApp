@@ -29,7 +29,8 @@ enum APIError: CustomError {
   var message: String? {
     switch self {
     case .requestFailed(_):
-      return localizedDescription
+      // TODO: switch status code
+      return "Request couldn't be completed"
     case .postProcessingFailed(_):
       return "Something went wrong please contact the developer."
     case .noData:

@@ -21,9 +21,6 @@ class ProfileFeedCell: UICollectionViewCell {
   @IBOutlet var ageResidenceDividerLabel: UILabel!
   @IBOutlet weak var ageResidenceStackView: UIStackView!
 
-  private static let defaultImage = UIImage(systemName: "person.circle.fill")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(hierarchicalColor: .white))
-  private static let failureImage = UIImage(systemName: "xmark.seal")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(hierarchicalColor: .white))
-
   private static let imageLoadingOptions = ImageLoadingOptions(
     placeholder: defaultImage,
     failureImage: failureImage,
@@ -32,9 +29,9 @@ class ProfileFeedCell: UICollectionViewCell {
       failure: UIView.ContentMode.scaleAspectFit,
       placeholder: UIView.ContentMode.scaleAspectFit))
   
-  var pixelSize: CGFloat { Self.DEFAULT_IMAGE_HEIGHT * UIScreen.main.scale }
+  static var pixelSize: CGFloat { Self.DEFAULT_IMAGE_HEIGHT * UIScreen.main.scale }
   
-  var resizedImageProcessors: [ImageProcessing] {
+  static var resizedImageProcessors: [ImageProcessing] {
     let imageSize = CGSize(width: pixelSize, height: pixelSize)
     return [ImageProcessors.Resize(size: imageSize, contentMode: .aspectFill)]
   }
@@ -84,7 +81,7 @@ class ProfileFeedCell: UICollectionViewCell {
   }
   
   private func loadImage(withURL url: URL?) {
-    let request = ImageRequest(url: url, processors: resizedImageProcessors)
+    let request = ImageRequest(url: url, processors: ProfileFeedCell.resizedImageProcessors)
     
     imageView.image = Self.imageLoadingOptions.placeholder
     imageView.contentMode = .scaleAspectFit

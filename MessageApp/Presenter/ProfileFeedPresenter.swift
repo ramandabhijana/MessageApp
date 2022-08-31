@@ -63,9 +63,8 @@ class ProfileFeedPresenter: ProfileFeedPresenterProtocol {
             errorMessage = error.message ?? "Unknown Error"
           }
           self?.viewController?.showErrorView(withMessage: errorMessage)
-          self?.loading = false
         },
-        onCompleted: { [weak self] in
+        onDisposed: { [weak self] in
           self?.loading = false
         }
       )
@@ -87,9 +86,8 @@ class ProfileFeedPresenter: ProfileFeedPresenterProtocol {
         },
         onError: { [weak self] error in
           self?.viewController?.showError(error)
-          self?.showingInfiniteScrollIndicator = false
         },
-        onCompleted: { [weak self] in
+        onDisposed: { [weak self] in
           self?.showingInfiniteScrollIndicator = false
         }
       )
@@ -102,7 +100,6 @@ class ProfileFeedPresenter: ProfileFeedPresenterProtocol {
       .subscribe(
         onNext: { [weak self] _ in
           guard let self = self else { return }
-          self.viewController?.refreshControl.endRefreshing()
           self.viewController?.removeErrorView() // if any
           self.viewController?.removeEmptyView() // if any
           if self.items.isEmpty {
@@ -112,7 +109,9 @@ class ProfileFeedPresenter: ProfileFeedPresenterProtocol {
         },
         onError: { [weak self] error in
           self?.viewController?.showError(error)
-          self?.viewController?.removeEmptyView() // if any
+        },
+        onDisposed: {
+          self.viewController?.refreshControl.endRefreshing()
         }
       )
       .disposed(by: disposeBag)

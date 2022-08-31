@@ -40,6 +40,7 @@ class ProfileFeedViewController: UIViewController {
   
   private var presenter: ProfileFeedPresenterProtocol
   private let disposeBag = DisposeBag()
+  private let transition = FeedsToDetailTransitionAnimator()
   private(set) var infiniteScrollIndicator: LoadingCollectionReusableView?
   private(set) var refreshControl = UIRefreshControl()
   
@@ -66,6 +67,7 @@ class ProfileFeedViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = APP_NAME
+    navigationController?.delegate = self
     presenter.loadInitialList()
     refreshControl.rx.controlEvent(.valueChanged)
       .subscribe { [weak self]  _ in
@@ -122,5 +124,41 @@ extension ProfileFeedViewController: CHTCollectionViewDelegateWaterfallLayout {
       withHorizontalFittingPriority: .required,
       verticalFittingPriority: .fittingSizeLevel).height
     return CGSize(width: width, height: height)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let item = presenter.items[indexPath.item]
+    let presenter = ProfileDisplayPresenter(feedItem: item)
+    navigationController?.pushViewController(
+      ProfileDisplayViewController.createFromStoryboard(presenter: presenter),
+      animated: true)
+  }
+}
+
+extension ProfileFeedViewController: UINavigationControllerDelegate {
+  func navigationController(_ navigationController: UINavigationController,
+                            animationControllerFor operation: UINavigationController.Operation,
+                            from fromVC: UIViewController,
+                            to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    if operation == .push {
+      guard
+        let selectedItemIndexPath = feedsCollectionView.indexPathsForSelectedItems?.last,
+        let selectedCell = feedsCollectionView.cellForItem(at: selectedItemIndexPath) as? ProfileFeedCell,
+        let selectedCellSuperview = selectedCell.superview
+      else {
+        return nil
+      }
+
+      transition.originFrame = selectedCellSuperview.convert(selectedCell.frame, to: nil)
+      transition.originFrame = CGRect(
+        x: transition.originFrame.origin.x,
+        y: transition.originFrame.origin.y,
+        width: transition.originFrame.size.width,
+        height: transition.originFrame.size.height)
+    }
+    
+    transition.operation = operation
+    
+    return transition
   }
 }

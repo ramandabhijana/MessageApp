@@ -25,10 +25,6 @@ struct ProfileListItem: Decodable, Equatable {
     self.item = item
   }
   
-//  init(id: Int) {
-//
-//  }
-  
   var id: Int? {
     if let idString = item.components(separatedBy: "_").last,
        let id = Int(idString) {

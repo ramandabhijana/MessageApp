@@ -13,6 +13,14 @@ enum StateViews: Int {
   case empty = 0101
 }
 
+var defaultImage: UIImage? {
+  UIImage(systemName: "person.circle.fill")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(hierarchicalColor: .white))
+}
+
+var failureImage: UIImage? {
+  UIImage(systemName: "xmark.seal")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(hierarchicalColor: .white))
+}
+
 var loadingView: UIStackView {
   let activityIndicator = UIActivityIndicatorView(style: .medium)
   activityIndicator.color = .label

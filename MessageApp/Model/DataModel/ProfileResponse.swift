@@ -38,6 +38,11 @@ struct ProfileResponse: Decodable {
   var hasProfileImage: Bool {
     imageId != 0
   }
+  
+  var imageURL: URL? {
+    if let imageUrl = imageUrl { return URL(string: imageUrl) }
+    return nil
+  }
 }
 
 extension ProfileResponse: Equatable {

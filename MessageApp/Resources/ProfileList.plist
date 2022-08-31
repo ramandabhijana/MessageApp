@@ -59,88 +59,88 @@
 		<string>Male_1</string>
 		<string>Female_2</string>
 	</array>
-  <key>area</key>
-  <array>
-    <string>Unselected</string>
-    <string>Alabama</string>
-    <string>Alaska</string>
-    <string>Arizona</string>
-    <string>Arkansas</string>
-    <string>California</string>
-    <string>Colorado</string>
-    <string>Connecticut</string>
-    <string>Delaware</string>
-    <string>Florida</string>
-    <string>Georgia</string>
-    <string>Hawaii</string>
-    <string>Idaho</string>
-    <string>Illinois Indiana</string>
-    <string>Iowa</string>
-    <string>Kansas</string>
-    <string>Kentucky</string>
-    <string>Louisiana</string>
-    <string>Maine</string>
-    <string>Maryland</string>
-    <string>Massachusetts</string>
-    <string>Michigan</string>
-    <string>Minnesota</string>
-    <string>Mississippi</string>
-    <string>Missouri</string>
-    <string>Montana Nebraska</string>
-    <string>Nevada</string>
-    <string>New Hampshire</string>
-    <string>New Jersey</string>
-    <string>New Mexico</string>
-    <string>New York</string>
-    <string>North Carolina</string>
-    <string>North Dakota</string>
-    <string>Ohio</string>
-    <string>Oklahoma</string>
-    <string>Oregon</string>
-    <string>Pennsylvania Rhode Island</string>
-    <string>South Carolina</string>
-    <string>South Dakota</string>
-    <string>Tennessee</string>
-    <string>Texas</string>
-    <string>Utah</string>
-    <string>Vermont</string>
-    <string>Virginia</string>
-    <string>Washington</string>
-    <string>West Virginia</string>
-    <string>Wisconsin</string>
-    <string>Wyoming</string>
-  </array>
-  <key>hobby</key>
-  <array>
-    <string>Unselected_0</string>
-    <string>Reading_1</string>
-    <string>Traveling_2</string>
-    <string>Fishing_3</string>
-    <string>Crafting_4</string>
-    <string>Collecting_5</string>
-    <string>Gardening_6</string>
-    <string>Yoga_7</string>
-    <string>Cooking_8</string>
-    <string>Painting_9</string>
-    <string>Knitting_10</string>
-  </array>
-  <key>character</key>
-  <array>
-    <string>Unselected_0</string>
-    <string>Honest_1</string>
-    <string>Brave_2</string>
-    <string>Compassionate_3</string>
-    <string>Leader_4</string>
-    <string>Courageous_5</string>
-    <string>Unselfish_6</string>
-    <string>Loyal_7</string>
-    <string>Hard-working_8</string>
-    <string>Independent_9</string>
-    <string>Selfish_10</string>
-    <string>Responsible_11</string>
-    <string>Considerate_12</string>
-    <string>Self-confident_13</string>
-    <string>Humble_14</string>
-  </array>
+	<key>area</key>
+	<array>
+		<string>Unselected</string>
+		<string>Alabama</string>
+		<string>Alaska</string>
+		<string>Arizona</string>
+		<string>Arkansas</string>
+		<string>California</string>
+		<string>Colorado</string>
+		<string>Connecticut</string>
+		<string>Delaware</string>
+		<string>Florida</string>
+		<string>Georgia</string>
+		<string>Hawaii</string>
+		<string>Idaho</string>
+		<string>Illinois Indiana</string>
+		<string>Iowa</string>
+		<string>Kansas</string>
+		<string>Kentucky</string>
+		<string>Louisiana</string>
+		<string>Maine</string>
+		<string>Maryland</string>
+		<string>Massachusetts</string>
+		<string>Michigan</string>
+		<string>Minnesota</string>
+		<string>Mississippi</string>
+		<string>Missouri</string>
+		<string>Montana Nebraska</string>
+		<string>Nevada</string>
+		<string>New Hampshire</string>
+		<string>New Jersey</string>
+		<string>New Mexico</string>
+		<string>New York</string>
+		<string>North Carolina</string>
+		<string>North Dakota</string>
+		<string>Ohio</string>
+		<string>Oklahoma</string>
+		<string>Oregon</string>
+		<string>Pennsylvania Rhode Island</string>
+		<string>South Carolina</string>
+		<string>South Dakota</string>
+		<string>Tennessee</string>
+		<string>Texas</string>
+		<string>Utah</string>
+		<string>Vermont</string>
+		<string>Virginia</string>
+		<string>Washington</string>
+		<string>West Virginia</string>
+		<string>Wisconsin</string>
+		<string>Wyoming</string>
+	</array>
+	<key>hobby</key>
+	<array>
+		<string>Unselected_0</string>
+		<string>Reading_1</string>
+		<string>Traveling_2</string>
+		<string>Fishing_3</string>
+		<string>Crafting_4</string>
+		<string>Collecting_5</string>
+		<string>Gardening_6</string>
+		<string>Yoga_7</string>
+		<string>Cooking_8</string>
+		<string>Painting_9</string>
+		<string>Knitting_10</string>
+	</array>
+	<key>character</key>
+	<array>
+		<string>Unselected_0</string>
+		<string>Honest_1</string>
+		<string>Brave_2</string>
+		<string>Compassionate_3</string>
+		<string>Leader_4</string>
+		<string>Courageous_5</string>
+		<string>Unselfish_6</string>
+		<string>Loyal_7</string>
+		<string>Hard-working_8</string>
+		<string>Independent_9</string>
+		<string>Selfish_10</string>
+		<string>Responsible_11</string>
+		<string>Considerate_12</string>
+		<string>Self-confident_13</string>
+		<string>Humble_14</string>
+	</array>
 </dict>
 </plist>

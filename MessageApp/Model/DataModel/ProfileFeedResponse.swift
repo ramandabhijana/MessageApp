@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 struct ProfileFeedResponse: Decodable {
   let status: Int
@@ -27,6 +28,18 @@ struct ProfileFeedItem: Decodable {
   var imageURL: URL? {
     if let imageUrl = imageUrl {
       return URL(string: imageUrl)
+    }
+    return nil
+  }
+  
+  var imageSizeValue: CGSize? {
+    if let imageSize = imageSize {
+      let whSeparated = imageSize.split(separator: "x")
+      guard whSeparated.count == 2,
+            let width = Int(whSeparated[0]),
+            let height = Int(whSeparated[1])
+      else { return nil }
+      return CGSize(width: CGFloat(width), height: CGFloat(height))
     }
     return nil
   }
