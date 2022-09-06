@@ -13,6 +13,7 @@ target 'MessageApp' do
   pod 'FittedSheets'
   pod 'CHTCollectionViewWaterfallLayout'
   pod 'Nuke'
-  pod 'NukeUI'
+  pod 'RealmSwift'
+  pod 'RxDataSources'
 
 end

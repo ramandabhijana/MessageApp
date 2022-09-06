@@ -17,6 +17,16 @@
 		EB28937428A23321000C38D1 /* LoggedInAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB28937328A23321000C38D1 /* LoggedInAuth.swift */; };
 		EB291BBF28A10455009A0F90 /* ReplaceDeleteProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB291BBE28A10455009A0F90 /* ReplaceDeleteProfileImageViewController.swift */; };
 		EB291BC228A104A3009A0F90 /* ReplaceDeleteProfileImageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB291BC128A104A3009A0F90 /* ReplaceDeleteProfileImageViewController.storyboard */; };
+		EB3628D328C05B5E00A51D47 /* TalkListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3628D128C05B5E00A51D47 /* TalkListCell.swift */; };
+		EB3628D428C05B5E00A51D47 /* TalkListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3628D228C05B5E00A51D47 /* TalkListCell.xib */; };
+		EB3628D628C0654D00A51D47 /* TalkListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3628D528C0654D00A51D47 /* TalkListPresenter.swift */; };
+		EB3628D828C0830000A51D47 /* TalkListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3628D728C0830000A51D47 /* TalkListRequest.swift */; };
+		EB3628DA28C0833B00A51D47 /* DeleteTalkListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3628D928C0833B00A51D47 /* DeleteTalkListRequest.swift */; };
+		EB3628DC28C083A400A51D47 /* TalkListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3628DB28C083A400A51D47 /* TalkListResponse.swift */; };
+		EB3628DE28C089EB00A51D47 /* TalkListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3628DD28C089EB00A51D47 /* TalkListDataSource.swift */; };
+		EB3628E028C08EF100A51D47 /* TalkListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3628DF28C08EF100A51D47 /* TalkListEntity.swift */; };
+		EB3628E228C0BB0F00A51D47 /* SendMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3628E128C0BB0E00A51D47 /* SendMessageRequest.swift */; };
+		EB3628E428C0D46C00A51D47 /* SendMessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3628E328C0D46B00A51D47 /* SendMessageResponse.swift */; };
 		EB529D012897B0A9004CB8E9 /* SignUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB529D002897B0A9004CB8E9 /* SignUpViewController.storyboard */; };
 		EB7683182898D70E0083B2E9 /* FormSubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7683172898D70E0083B2E9 /* FormSubmitButton.swift */; };
 		EB76831B2898EC7D0083B2E9 /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB76831A2898EC7D0083B2E9 /* SignUpPresenter.swift */; };
@@ -114,6 +124,16 @@
 		EB28937328A23321000C38D1 /* LoggedInAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInAuth.swift; sourceTree = "<group>"; };
 		EB291BBE28A10455009A0F90 /* ReplaceDeleteProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceDeleteProfileImageViewController.swift; sourceTree = "<group>"; };
 		EB291BC128A104A3009A0F90 /* ReplaceDeleteProfileImageViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ReplaceDeleteProfileImageViewController.storyboard; sourceTree = "<group>"; };
+		EB3628D128C05B5E00A51D47 /* TalkListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkListCell.swift; sourceTree = "<group>"; };
+		EB3628D228C05B5E00A51D47 /* TalkListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TalkListCell.xib; sourceTree = "<group>"; };
+		EB3628D528C0654D00A51D47 /* TalkListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkListPresenter.swift; sourceTree = "<group>"; };
+		EB3628D728C0830000A51D47 /* TalkListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkListRequest.swift; sourceTree = "<group>"; };
+		EB3628D928C0833B00A51D47 /* DeleteTalkListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTalkListRequest.swift; sourceTree = "<group>"; };
+		EB3628DB28C083A400A51D47 /* TalkListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkListResponse.swift; sourceTree = "<group>"; };
+		EB3628DD28C089EB00A51D47 /* TalkListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkListDataSource.swift; sourceTree = "<group>"; };
+		EB3628DF28C08EF100A51D47 /* TalkListEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkListEntity.swift; sourceTree = "<group>"; };
+		EB3628E128C0BB0E00A51D47 /* SendMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageRequest.swift; sourceTree = "<group>"; };
+		EB3628E328C0D46B00A51D47 /* SendMessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageResponse.swift; sourceTree = "<group>"; };
 		EB529D002897B0A9004CB8E9 /* SignUpViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUpViewController.storyboard; sourceTree = "<group>"; };
 		EB7683172898D70E0083B2E9 /* FormSubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSubmitButton.swift; sourceTree = "<group>"; };
 		EB76831A2898EC7D0083B2E9 /* SignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
@@ -262,6 +282,7 @@
 				EBA4DA6828AB733B00B53C76 /* EditProfileDataSource.swift */,
 				EBFA7F4428B4B73200ACB39E /* ProfileFeedDataSource.swift */,
 				EB9591A728BCA7E700AE2A81 /* ProfileDisplayDataSource.swift */,
+				EB3628DD28C089EB00A51D47 /* TalkListDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -271,6 +292,15 @@
 			children = (
 				EB291BC128A104A3009A0F90 /* ReplaceDeleteProfileImageViewController.storyboard */,
 				EB291BBE28A10455009A0F90 /* ReplaceDeleteProfileImageViewController.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		EB3628D028C05B1200A51D47 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				EB3628D128C05B5E00A51D47 /* TalkListCell.swift */,
+				EB3628D228C05B5E00A51D47 /* TalkListCell.xib */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -334,6 +364,9 @@
 				EBE9F06028A4FA510015C2B5 /* DeleteProfilePictureRequest.swift */,
 				EB11DCB628AE13B5001858F1 /* EditProfileRequest.swift */,
 				EBFA7F4628B4BBB600ACB39E /* ProfileFeedRequest.swift */,
+				EB3628D728C0830000A51D47 /* TalkListRequest.swift */,
+				EB3628D928C0833B00A51D47 /* DeleteTalkListRequest.swift */,
+				EB3628E128C0BB0E00A51D47 /* SendMessageRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -365,6 +398,9 @@
 				EBBF671228A251FD00D7B698 /* StatusResponse.swift */,
 				EBE34E8028A4E21E0037906F /* ImageUploadResponse.swift */,
 				EBFA7F4828B4BC2600ACB39E /* ProfileFeedResponse.swift */,
+				EB3628DB28C083A400A51D47 /* TalkListResponse.swift */,
+				EB3628E328C0D46B00A51D47 /* SendMessageResponse.swift */,
+				EB3628DF28C08EF100A51D47 /* TalkListEntity.swift */,
 				EB28937328A23321000C38D1 /* LoggedInAuth.swift */,
 				EBB1A8CB28AB25160092C949 /* ProfileListItem.swift */,
 				EBB1A8CD28AB272E0092C949 /* ProfileList.swift */,
@@ -411,6 +447,7 @@
 		EBA1E709289A3EC90077DFA9 /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				EB3628D028C05B1200A51D47 /* Subviews */,
 				EBA1E711289A3F610077DFA9 /* TalkListViewController.storyboard */,
 				EBA1E70F289A3F4B0077DFA9 /* TalkListViewController.swift */,
 			);
@@ -562,6 +599,7 @@
 				EBA4DA6628AB620400B53C76 /* EditProfilePresenter.swift */,
 				EBFA7F4228B4B67E00ACB39E /* ProfileFeedPresenter.swift */,
 				EB9591A928BCA83B00AE2A81 /* ProfileDisplayPresenter.swift */,
+				EB3628D528C0654D00A51D47 /* TalkListPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -699,6 +737,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB3628D428C05B5E00A51D47 /* TalkListCell.xib in Resources */,
 				EBBF672A28A2680500D7B698 /* CameraCell.xib in Resources */,
 				EBDED19F28B46A4400BB9A5B /* ProfileFeedCell.xib in Resources */,
 				EBBC76F828B7626200EDF820 /* LoadingCollectionReusableView.xib in Resources */,
@@ -781,6 +820,8 @@
 				EB28937428A23321000C38D1 /* LoggedInAuth.swift in Sources */,
 				EBFA7F4928B4BC2600ACB39E /* ProfileFeedResponse.swift in Sources */,
 				EB8431F128BDF5E900DB1693 /* FeedsToDetailTransitionAnimator.swift in Sources */,
+				EB3628D628C0654D00A51D47 /* TalkListPresenter.swift in Sources */,
+				EB3628D828C0830000A51D47 /* TalkListRequest.swift in Sources */,
 				EBA1E723289A71B00077DFA9 /* KeyboardHandler.swift in Sources */,
 				EBBC76F728B7626200EDF820 /* LoadingCollectionReusableView.swift in Sources */,
 				EBFA7F4528B4B73200ACB39E /* ProfileFeedDataSource.swift in Sources */,
@@ -795,19 +836,25 @@
 				EBFA7F4128B4B55500ACB39E /* ProfileDisplayViewController.swift in Sources */,
 				EBDED19A28B3716B00BB9A5B /* AuthError.swift in Sources */,
 				EB76832D2899405B0083B2E9 /* APIClient.swift in Sources */,
+				EB3628E428C0D46C00A51D47 /* SendMessageResponse.swift in Sources */,
 				EBA4DA6728AB620400B53C76 /* EditProfilePresenter.swift in Sources */,
 				EBD7DB3A28979AF70015A1FF /* SignUpViewController.swift in Sources */,
 				EBBF672C28A3809D00D7B698 /* MediaManagePresenter.swift in Sources */,
 				EBC24DE4289BA66100E6C8DF /* InputTextField.swift in Sources */,
+				EB3628DA28C0833B00A51D47 /* DeleteTalkListRequest.swift in Sources */,
+				EB3628DC28C083A400A51D47 /* TalkListResponse.swift in Sources */,
 				EB76832F289962F90083B2E9 /* RegistryRequest.swift in Sources */,
 				EB9591AA28BCA83B00AE2A81 /* ProfileDisplayPresenter.swift in Sources */,
 				EB768320289912740083B2E9 /* ViewController+.swift in Sources */,
 				EBA1E721289A5AFC0077DFA9 /* LoginPresenter.swift in Sources */,
 				EB9591A628BC949900AE2A81 /* PhotoViewerViewController.swift in Sources */,
+				EB3628E228C0BB0F00A51D47 /* SendMessageRequest.swift in Sources */,
 				EBA1E716289A3F8C0077DFA9 /* MyPageViewController.swift in Sources */,
 				EB768326289919E00083B2E9 /* MainTabViewController.swift in Sources */,
+				EB3628D328C05B5E00A51D47 /* TalkListCell.swift in Sources */,
 				EBD7DB342897980C0015A1FF /* Constants.swift in Sources */,
 				EB7683182898D70E0083B2E9 /* FormSubmitButton.swift in Sources */,
+				EB3628DE28C089EB00A51D47 /* TalkListDataSource.swift in Sources */,
 				EBD7DB2C289791290015A1FF /* TopViewController.swift in Sources */,
 				EBBF671528A2523000D7B698 /* DeleteAccountRequest.swift in Sources */,
 				EBD7DB32289797380015A1FF /* Colors.swift in Sources */,
@@ -817,6 +864,7 @@
 				EBE9F06128A4FA510015C2B5 /* DeleteProfilePictureRequest.swift in Sources */,
 				EBDED19E28B46A4400BB9A5B /* ProfileFeedCell.swift in Sources */,
 				EBB1A8D228AB30820092C949 /* SelectionCell.swift in Sources */,
+				EB3628E028C08EF100A51D47 /* TalkListEntity.swift in Sources */,
 				EB11DCB728AE13B5001858F1 /* EditProfileRequest.swift in Sources */,
 				EBFA7F4B28B6141B00ACB39E /* StateViews.swift in Sources */,
 				EBBF672528A267C100D7B698 /* PhotoCell.swift in Sources */,

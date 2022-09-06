@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class FormSubmitButton: UIButton {
-  private(set) var buttonState: FormSubmitButtonState! {
+  var buttonState: FormSubmitButtonState! {
     didSet {
       switch buttonState {
       case .disabled:
@@ -79,3 +81,10 @@ enum FormSubmitButtonState {
   case loading
 }
 
+extension Reactive where Base: FormSubmitButton {
+  var buttonState: Binder<FormSubmitButtonState> {
+    return Binder(self.base) { view, state in
+      view.buttonState = state
+    }
+  }
+}

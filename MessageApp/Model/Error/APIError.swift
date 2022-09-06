@@ -20,7 +20,7 @@ enum APIError: CustomError {
     case .postProcessingFailed(_):
       return "Internal Error"
     case .noData:
-      return "No Data"
+      return "Missing Data"
     case .badResponse(let errorResponse):
       return errorResponse.titleOrDefault
     }

@@ -11,6 +11,7 @@ import RxSwift
 
 struct TerrarestaAPIClient {
   private static let BASE_URL:  URL = URL(string: "https://terraresta.com")!
+  private static let backgroundScheduler = ConcurrentDispatchQueueScheduler(qos: .default)
   
   static func performRequest<T: APIRequest>(_ request: T) -> Observable<T.Response> {
     var url = BASE_URL.appendingPathComponent(request.path)
@@ -57,6 +58,7 @@ struct TerrarestaAPIClient {
         }
       return Disposables.create()
     }
+    .subscribeOn(backgroundScheduler)
   }
 }
 

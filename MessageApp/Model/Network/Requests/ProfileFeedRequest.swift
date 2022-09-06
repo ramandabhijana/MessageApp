@@ -21,7 +21,7 @@ struct ProfileFeedRequest: APIRequest {
   init(accessToken: String, lastLoginTime: Date?) {
     self.accessToken = accessToken
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss.ffffff"
+    dateFormatter.dateFormat = API_DATE_FORMAT
     self.lastLoginTime = lastLoginTime == nil ? nil : dateFormatter.string(from: lastLoginTime!)
   }
   

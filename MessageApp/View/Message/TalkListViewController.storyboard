@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,29 +17,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TalkListViewController" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pbt-cJ-jr5">
-                                <rect key="frame" x="122" y="437.5" width="170" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8re-Nn-cfC">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jgb-nX-8wW" customClass="FormSubmitButton" customModule="MessageApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="769" width="414" height="44"/>
+                                <color key="backgroundColor" name="ColorDisabled"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="cek-6q-nQo"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Delete">
+                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleBody"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTapDeleteButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="QwX-Xs-rhX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Pbt-cJ-jr5" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="CwA-ha-bdH"/>
-                            <constraint firstItem="Pbt-cJ-jr5" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="NF9-tk-Xs5"/>
+                            <constraint firstItem="Jgb-nX-8wW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="MNE-3l-KAu"/>
+                            <constraint firstItem="Jgb-nX-8wW" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="ZKg-DM-FSF"/>
+                            <constraint firstItem="8re-Nn-cfC" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="bM6-aC-lnF"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Jgb-nX-8wW" secondAttribute="bottom" id="cSQ-Mo-hM6"/>
+                            <constraint firstItem="8re-Nn-cfC" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="fku-dx-Tuc"/>
+                            <constraint firstItem="8re-Nn-cfC" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="gTr-R8-DK5"/>
+                            <constraint firstItem="8re-Nn-cfC" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="xxq-WE-Cmh"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="deleteButton" destination="Jgb-nX-8wW" id="9jl-Ky-iyz"/>
+                        <outlet property="tableView" destination="8re-Nn-cfC" id="p1l-OF-trZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-23" y="99"/>
+            <point key="canvasLocation" x="-23.188405797101453" y="98.4375"/>
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <namedColor name="ColorDisabled">
+            <color red="0.56862745098039214" green="0.56862745098039214" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

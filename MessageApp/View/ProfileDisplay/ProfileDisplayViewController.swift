@@ -207,8 +207,19 @@ class ProfileDisplayViewController: UIViewController {
   }
   
   @IBAction func didTapSendMessage(_ sender: UIButton) {
-    // Ask presenter to present talk view Controller
-    
+    // TODO: Temporary action. Please replace with actual message input.
+    let token = try! AuthManager.accessToken.get()
+    let sendMessageRequest = SendMessageRequest(accessToken: token, toUserId: presenter.feedItem.userId, message: "こんにちは")
+    TerrarestaAPIClient.performRequest(sendMessageRequest)
+      .subscribe(onNext: { [weak self] response in
+        self?.showAlert(title: "Your message was sent!", message: "This action is temporary and will be replaced in the future.")
+        print("response: \(response)")
+      },
+                 onError: { error in
+        print("Error for request: \(sendMessageRequest). \(error)")
+      }
+      )
+      .disposed(by: disposeBag)
   }
   
   @objc private func didTapProfileImageView(_ sender: UITapGestureRecognizer) {

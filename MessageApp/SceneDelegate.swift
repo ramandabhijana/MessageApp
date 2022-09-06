@@ -7,6 +7,7 @@
 
 import UIKit
 import Nuke
+import RealmSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -15,6 +16,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     window = UIWindow(windowScene: windowScene)
+    
+    // [[NSFileManager defaultManager] removeItemAtURL:[RLMRealmConfiguration defaultConfiguration].fileURL error:nil];
+    
+//    try! FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
+    
+//    let realm = try! Realm()
+//    try! realm.write({
+//      realm.deleteAll()
+//    })
     
     // Set up cache
     DataLoader.sharedUrlCache.diskCapacity = .zero
