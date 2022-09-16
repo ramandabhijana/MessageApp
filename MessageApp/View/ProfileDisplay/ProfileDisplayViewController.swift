@@ -10,11 +10,14 @@ import RxSwift
 import Nuke
 
 class ProfileDisplayViewController: UIViewController {
-  static func createFromStoryboard(presenter: ProfileDisplayPresenterProtocol) -> ProfileDisplayViewController {
+  static func createFromStoryboard(
+    presenter: ProfileDisplayPresenterProtocol,
+    shouldAnimateOnAppear: Bool = true
+  ) -> ProfileDisplayViewController {
     let name = String(describing: ProfileDisplayViewController.self)
     let storyboard = UIStoryboard(name: name, bundle: nil)
     return storyboard.instantiateViewController(identifier: name) { coder in
-      ProfileDisplayViewController(coder: coder, presenter: presenter)
+      ProfileDisplayViewController(coder: coder, presenter: presenter, shouldAnimateOnAppear: shouldAnimateOnAppear)
     }
   }
   
@@ -37,11 +40,11 @@ class ProfileDisplayViewController: UIViewController {
   @IBOutlet weak var hobbyLabel: UILabel!
   @IBOutlet weak var characterStackView: UIStackView!
   @IBOutlet weak var characterLabel: UILabel!
-  @IBOutlet weak var sendMessageButton: UIButton!
+  @IBOutlet weak var sendMessageButton: UIButton?
   @IBOutlet weak var imageViewHeightConstraints: NSLayoutConstraint!
   
   private var presenter: ProfileDisplayPresenterProtocol
-  private var shouldAnimateOnAppear = true
+  private var shouldAnimateOnAppear: Bool
   private let disposeBag = DisposeBag()
   
   private lazy var itemsLoadingView: UIView = {
@@ -59,8 +62,11 @@ class ProfileDisplayViewController: UIViewController {
     return view
   }()
   
-  init?(coder: NSCoder, presenter: ProfileDisplayPresenterProtocol) {
+  init?(coder: NSCoder,
+        presenter: ProfileDisplayPresenterProtocol,
+        shouldAnimateOnAppear: Bool) {
     self.presenter = presenter
+    self.shouldAnimateOnAppear = shouldAnimateOnAppear
     super.init(coder: coder)
     self.presenter.viewController = self
   }
@@ -71,6 +77,9 @@ class ProfileDisplayViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    if !presenter.shouldIncludeSendMessageButton {
+      sendMessageButton?.removeFromSuperview()
+    }
     if shouldAnimateOnAppear {
       profileImageView.layer.cornerRadius = PROFILE_DISPLAY_INITIAL_CORNER_RADIUS
       profileImageView.layer.masksToBounds = true
@@ -79,7 +88,7 @@ class ProfileDisplayViewController: UIViewController {
         if view == profileImageView { continue }
         view.alpha = 0
       }
-      sendMessageButton.alpha = 0
+      sendMessageButton?.alpha = 0
     }
   }
   
@@ -89,7 +98,7 @@ class ProfileDisplayViewController: UIViewController {
     navigationItem.title = "Profile Detail"
     
     setupProfileImageView()
-    setFreewordText(presenter.feedItem.aboutMe)
+    freewordTextView.text = presenter.feedItem.aboutMe
     nicknameLabel.text = presenter.feedItem.nickname
     
     presenter.fetchProfileData()
@@ -136,7 +145,7 @@ class ProfileDisplayViewController: UIViewController {
         withDuration: 0.5,
         delay: 0.5,
         animations: {
-          self.sendMessageButton.alpha = 1
+          self.sendMessageButton?.alpha = 1
         },
         completion: nil)
     }
@@ -193,33 +202,13 @@ class ProfileDisplayViewController: UIViewController {
     return profileImageView.frame.width * (size.height / size.width)
   }
   
-  private func setFreewordText(_ text: String) {
-    if !text.isEmpty {
-      freewordTextView.text = text
-      return
-    }
-    freewordTextView.removeFromSuperview()
-  }
-  
   private func setArrangedProfileItemsHidden(_ hidden: Bool) {
     profileItemsStackView.arrangedSubviews
       .forEach { $0.isHidden = hidden }
   }
   
   @IBAction func didTapSendMessage(_ sender: UIButton) {
-    // TODO: Temporary action. Please replace with actual message input.
-    let token = try! AuthManager.accessToken.get()
-    let sendMessageRequest = SendMessageRequest(accessToken: token, toUserId: presenter.feedItem.userId, message: "こんにちは")
-    TerrarestaAPIClient.performRequest(sendMessageRequest)
-      .subscribe(onNext: { [weak self] response in
-        self?.showAlert(title: "Your message was sent!", message: "This action is temporary and will be replaced in the future.")
-        print("response: \(response)")
-      },
-                 onError: { error in
-        print("Error for request: \(sendMessageRequest). \(error)")
-      }
-      )
-      .disposed(by: disposeBag)
+    presenter.presentTalkViewController()
   }
   
   @objc private func didTapProfileImageView(_ sender: UITapGestureRecognizer) {
@@ -229,6 +218,14 @@ class ProfileDisplayViewController: UIViewController {
 }
 
 extension ProfileDisplayViewController {
+  func setFreewordText(_ text: String?) {
+    if let text = text, !text.isEmpty {
+      freewordTextView.text = text
+      return
+    }
+    freewordTextView.removeFromSuperview()
+  }
+  
   func setAgeLabelText(_ text: String?) {
     if let text = text {
       ageLabel.text = text

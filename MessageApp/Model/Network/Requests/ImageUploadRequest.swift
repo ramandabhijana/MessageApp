@@ -10,6 +10,10 @@ import Foundation
 enum ImageUploadLocation: String {
   case talk = "Talk"
   case profile = "Profile"
+  
+  func createFileName(withId id: Int) -> String {
+    return self.rawValue + "_\(id).jpg"
+  }
 }
 
 struct ImageUploadRequest: APIRequest {
@@ -20,12 +24,22 @@ struct ImageUploadRequest: APIRequest {
   private let location: String
   private let imageData: Data
   
-  init(accessToken: String, location: ImageUploadLocation, imageData: Data) {
+  init(accessToken: String, location: ImageUploadLocation, imageFileName: String, imageFileURLPath: URL, imageData: Data) {
     self.accessToken = accessToken
     self.location = location.rawValue
-    self.imageData = photoDataToFormData(data: imageData as NSData,
-                                         boundary: boundary,
-                                         fileName: "\(boundary).jpg") as Data
+    self.imageData = imageData.toFormData(
+      boundary: boundary,
+      fileName: imageFileName,
+      mimeType: mimeType(for: imageFileURLPath))
+  }
+  
+  init(accessToken: String, location: ImageUploadLocation, imageData: Data, fileId: Int) {
+    self.accessToken = accessToken
+    self.location = location.rawValue
+    self.imageData = imageData.toFormData(
+      boundary: boundary,
+      fileName: location.createFileName(withId: fileId),
+      mimeType: "image/jpeg")
   }
   
   var method: HTTPMethod { .POST }

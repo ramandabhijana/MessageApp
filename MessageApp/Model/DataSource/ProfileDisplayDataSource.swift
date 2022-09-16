@@ -10,6 +10,7 @@ import RxSwift
 
 class ProfileDisplayDataSource {
   private var profile: ProfileResponse!
+  private(set) var freeword: String?
   private(set) var age: Int?
   private(set) var sex: ProfileListItem?
   private(set) var occupancy: ProfileListItem?
@@ -33,6 +34,8 @@ class ProfileDisplayDataSource {
   
   private func setAttributes(with response: ProfileResponse) {
     profile = response
+    
+    self.freeword = response.aboutMe
     
     if let age = response.age, let _ = response.birthday {
       self.age = age

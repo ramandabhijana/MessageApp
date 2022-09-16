@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UniformTypeIdentifiers
 
 extension String {
   var isValidEmail: Bool {
@@ -19,4 +20,13 @@ extension String {
     let passwordPred = NSPredicate(format:"SELF MATCHES %@", passwordRegEx)
     return passwordPred.evaluate(with: self)
   }
+}
+
+func mimeType(for urlPath: URL) -> String {
+  let pathExtension = urlPath.pathExtension
+  if let type = UTType.init(filenameExtension: pathExtension),
+     let mimeType = type.preferredMIMEType {
+    return mimeType as String
+  }
+  return "application/octet-stream"
 }

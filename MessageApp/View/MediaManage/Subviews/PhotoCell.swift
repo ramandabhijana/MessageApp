@@ -9,13 +9,21 @@ import UIKit
 
 class PhotoCell: UICollectionViewCell {
   @IBOutlet weak var previewImageView: UIImageView!
+  @IBOutlet weak var playImageView: UIImageView!
   
   static let reuseIdentifier = String(describing: PhotoCell.self)
   
   var assetIdentifier: String!
   
+  var isVideo: Bool = false {
+    didSet {
+      playImageView.isHidden = !isVideo
+    }
+  }
+  
   override func awakeFromNib() {
     super.awakeFromNib()
+    playImageView.backgroundColor = .lightGray.withAlphaComponent(0.5)
   }
   
   override func prepareForReuse() {

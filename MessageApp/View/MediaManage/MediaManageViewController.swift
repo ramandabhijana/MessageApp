@@ -13,7 +13,7 @@ class MediaManageViewController: UICollectionViewController, UINavigationControl
   private static let DECIDE_BTN_TITLE = "Decide"
   private static let NAVIGATION_TITLE = "Select Image"
   
-  static func createFromStoryboard(presenter: MediaManagePresenterProtocol = MediaManagePresenter()) -> UIViewController {
+  static func createFromStoryboard(presenter: MediaManagePresenterProtocol = MediaManagePresenter(allowsVideoAsset: false)) -> MediaManageViewController {
     let storyboard = UIStoryboard(name: String(describing: MediaManageViewController.self), bundle: nil)
     return storyboard.instantiateViewController(identifier: String(describing: MediaManageViewController.self)) { coder in
       MediaManageViewController(coder: coder, presenter: presenter)
@@ -22,7 +22,14 @@ class MediaManageViewController: UICollectionViewController, UINavigationControl
   
   private lazy var manager = PHCachingImageManager()
   
-  private lazy var photos = MediaManageViewController.loadPhotos()
+  private lazy var mediaAssets: PHFetchResult<PHAsset> = {
+    let options = PHFetchOptions()
+    if presenter.allowsVideoAsset == false {
+      options.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
+    }
+    options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+    return PHAsset.fetchAssets(with: options)
+  }()
   
   private lazy var thumbnailSize: CGSize = {
     let cellSize = (self.collectionViewLayout as! UICollectionViewFlowLayout).itemSize
@@ -54,7 +61,22 @@ class MediaManageViewController: UICollectionViewController, UINavigationControl
   }()
   
   private var presenter: MediaManagePresenterProtocol
-  private var selectedPhoto: UIImage? = nil
+  
+  private var selectedPhoto: UIImage? = nil {
+    didSet {
+      if selectedPhoto != nil {
+        selectedVideo = nil
+      }
+    }
+  }
+  private var selectedVideo: AVAsset? = nil {
+    didSet {
+      if selectedVideo != nil {
+        selectedPhoto = nil
+      }
+    }
+  }
+  var onSuccessUploadAsset: ((_ assetId: Int, _ mediaType: PHAssetMediaType) -> ())?
   
   init?(coder: NSCoder, presenter: MediaManagePresenterProtocol) {
     self.presenter = presenter
@@ -84,7 +106,11 @@ class MediaManageViewController: UICollectionViewController, UINavigationControl
   }
   
   @objc private func didTapDecide() {
-    uploadImage()
+    if let photo = selectedPhoto {
+      uploadImage(photo)
+    } else if let video = selectedVideo {
+      uploadVideo(video)
+    }
   }
   
   func decideButtonEnabled(_ enabled: Bool) {
@@ -97,7 +123,7 @@ class MediaManageViewController: UICollectionViewController, UINavigationControl
   
   func applyLoadingAppearance() {
     closeButton.isEnabled = false
-    navigationItem.title = "Uploading Image..."
+    navigationItem.title = "Uploading Media..."
     navigationItem.rightBarButtonItem = loadingIndicator
     (loadingIndicator.customView as? UIActivityIndicatorView)?.startAnimating()
     collectionView.isUserInteractionEnabled = false
@@ -105,6 +131,7 @@ class MediaManageViewController: UICollectionViewController, UINavigationControl
   
   func applyNormalAppearance() {
     closeButton.isEnabled = true
+    decideButtonEnabled(true)
     navigationItem.title = Self.NAVIGATION_TITLE
     navigationItem.rightBarButtonItem = decideButton
     navigationItem.leftBarButtonItem = closeButton
@@ -116,8 +143,8 @@ class MediaManageViewController: UICollectionViewController, UINavigationControl
     AVCaptureDevice.fetchPermissionStatus(handler: handler)
   }
   
-  private func uploadImage() {
-    guard let imageData = selectedPhoto?.jpegData(compressionQuality: 0.5) else {
+  private func uploadImage(_ image: UIImage) {
+    guard let imageData = image.jpegData(compressionQuality: 0.5) else {
       showAlert(title: "Couldn't use this one",
                 message: "Please select other photo and try again.")
       return
@@ -125,9 +152,34 @@ class MediaManageViewController: UICollectionViewController, UINavigationControl
     presenter.upload(imageData: imageData)
   }
   
+  private func uploadVideo(_ video: AVAsset) {
+    decideButtonEnabled(false)
+    let fileURL = FileManager.default
+      .urls(for: .documentDirectory, in: .userDomainMask)[0]
+      .appendingPathComponent("new_video_upload.mp4")
+    let exportSession = AVAssetExportSession(asset: video, presetName: AVAssetExportPresetMediumQuality)
+    exportSession?.outputURL = fileURL
+    exportSession?.outputFileType = AVFileType.mp4
+    exportSession?.exportAsynchronously(completionHandler: { [weak self] in
+      // Check whether the video has been written to the file URL
+      guard let self = self else { return }
+      // Try to get video data out of the file
+      if let videoData = try? Data(contentsOf: fileURL) {
+        self.presenter.upload(videoData: videoData, fileURL: fileURL)
+      } else {
+        DispatchQueue.main.async {
+          self.decideButtonEnabled(true)
+          self.showAlert(title: "Missing data",
+                         message: "Please use other video.")
+        }
+        
+      }
+    })
+  }
+  
   // MARK: UICollectionViewDataSource
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return photos.count + 1
+    return mediaAssets.count + 1
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -137,10 +189,11 @@ class MediaManageViewController: UICollectionViewController, UINavigationControl
     }
     
     let photoIndexPath = presenter.photoIndexPath(for: indexPath)
-    let asset = photos.object(at: photoIndexPath.item)
+    let asset = mediaAssets.object(at: photoIndexPath.item)
     
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.reuseIdentifier, for: photoIndexPath) as! PhotoCell
     cell.assetIdentifier = asset.localIdentifier
+    cell.isVideo = asset.mediaType == .video
     
     photoIndexPath == presenter.selectedPhotoIndexPath ? cell.selected() : cell.deselected()
     
@@ -174,74 +227,46 @@ class MediaManageViewController: UICollectionViewController, UINavigationControl
         return
       }
       let photoIndexPath = presenter.photoIndexPath(for: indexPath)
-      let asset = photos.object(at: photoIndexPath.item)
-      manager.requestImage(
-        for: asset,
-        targetSize: view.frame.size,
-        contentMode: .aspectFill,
-        options: nil
-      ) { [weak self] image, info in
-        guard let self = self, let image = image, let info = info else { return }
-        
-        guard
-          let isThumbnail = info[PHImageResultIsDegradedKey] as? Bool,
-          isThumbnail == false
-        else { return }
-        
-        self.selectedPhoto = image
-        
-        (cell as! PhotoCell).selected()
-        
-        if let collectionViewPreviouslySelectedPhotoIndexPath = self.presenter.collectionViewSelectedPhotoIndexPath {
-          // Deselect the previously selected if any
-          if let previousSelectedCell = self.collectionView.cellForItem(at: collectionViewPreviouslySelectedPhotoIndexPath) as? PhotoCell {
-            previousSelectedCell.deselected()
-          }
+      let asset = mediaAssets.object(at: photoIndexPath.item)
+      
+      switch asset.mediaType {
+      case .video:
+        manager.requestAVAsset(forVideo: asset, options: nil) { [weak self] videoAsset, audioMix, info in
+          guard let self = self, let videoAsset = videoAsset else { return }
+          self.selectedVideo = videoAsset
         }
-        self.presenter.selectedPhotoIndexPath = photoIndexPath
+      case .image:
+        manager.requestImage(
+          for: asset,
+          targetSize: view.frame.size,
+          contentMode: .aspectFill,
+          options: nil
+        ) { [weak self] image, info in
+          guard let self = self, let image = image, let info = info else { return }
+          guard
+            let isThumbnail = info[PHImageResultIsDegradedKey] as? Bool,
+            isThumbnail == false
+          else { return }
+          self.selectedPhoto = image
+        }
+      default:
+        return
       }
+      
+      (cell as! PhotoCell).selected()
+      
+      if let collectionViewPreviouslySelectedPhotoIndexPath = self.presenter.collectionViewSelectedPhotoIndexPath {
+        // Deselect the previously selected if any
+        if let previousSelectedCell = self.collectionView.cellForItem(at: collectionViewPreviouslySelectedPhotoIndexPath) as? PhotoCell {
+          previousSelectedCell.deselected()
+        }
+      }
+      
+      presenter.selectedPhotoIndexPath = photoIndexPath
     default:
       break
     }
   
-  }
-  
-  // MARK: UICollectionViewDelegate
-  
-  /*
-   // Uncomment this method to specify if the specified item should be highlighted during tracking
-   override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-   return true
-   }
-   */
-  
-  /*
-   // Uncomment this method to specify if the specified item should be selected
-   override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-   return true
-   }
-   */
-  
-  /*
-   // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-   override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-   return false
-   }
-   
-   override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-   return false
-   }
-   
-   override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-   
-   }
-   */
-  
-  
-  static func loadPhotos() -> PHFetchResult<PHAsset> {
-    let options = PHFetchOptions()
-    options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-    return PHAsset.fetchAssets(with: options)
   }
 }
 
@@ -297,8 +322,7 @@ extension MediaManageViewController: UIImagePickerControllerDelegate {
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     if let pickedImage = info[.editedImage] as? UIImage {
       presenter.selectedPhotoIndexPath = nil
-      selectedPhoto = pickedImage
-      uploadImage()
+      uploadImage(pickedImage)
     }
     picker.dismiss(animated: true)
   }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class PhotoViewerViewController: UIViewController {
   static func createFromStoryboard(image: UIImage) -> PhotoViewerViewController {
@@ -13,6 +14,14 @@ class PhotoViewerViewController: UIViewController {
     let storyboard = UIStoryboard(name: name, bundle: nil)
     return storyboard.instantiateViewController(identifier: name) { coder in
       PhotoViewerViewController(coder: coder, image: image)
+    }
+  }
+  
+  static func createFromStoryboard(imageURL: URL) -> PhotoViewerViewController {
+    let name = String(describing: PhotoViewerViewController.self)
+    let storyboard = UIStoryboard(name: name, bundle: nil)
+    return storyboard.instantiateViewController(identifier: name) { coder in
+      PhotoViewerViewController(coder: coder, imageURL: imageURL)
     }
   }
   
@@ -29,10 +38,18 @@ class PhotoViewerViewController: UIViewController {
     return button
   }()
   
-  private var image: UIImage
+  private var image: UIImage?
+  
+  private var imageURL: URL?
+  private var imageViewImageDidSet: AnyCancellable?
   
   init?(coder: NSCoder, image: UIImage) {
     self.image = image
+    super.init(coder: coder)
+  }
+  
+  init?(coder: NSCoder, imageURL: URL?) {
+    self.imageURL = imageURL
     super.init(coder: coder)
   }
   
@@ -46,9 +63,27 @@ class PhotoViewerViewController: UIViewController {
     navigationController?.view.backgroundColor = .black
     navigationController?.navigationBar.barTintColor = .black
     scrollView.delegate = self
-    setupImageView()
-    updateZoomScale(forSize: scrollView.bounds.size)
-    centerImage()
+    
+    if let image = image {
+      imageView.image = image
+      setupImageView(withImage: image)
+      updateZoomScale(forSize: scrollView.bounds.size)
+      centerImage()
+    }
+    
+    if let imageURL = imageURL {
+      imageViewImageDidSet = imageView.publisher(for: \.image)
+        .compactMap { $0 }
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] image in
+          guard let self = self else { return }
+          self.setupImageView(withImage: image)
+          self.updateZoomScale(forSize: self.scrollView.bounds.size)
+          self.centerImage()
+        }
+    
+      loadImage(withURL: imageURL, imageView: imageView, failureImage: nil)
+    }
   }
   
   override func viewWillLayoutSubviews() {
@@ -57,8 +92,7 @@ class PhotoViewerViewController: UIViewController {
     centerImage()
   }
   
-  private func setupImageView() {
-    imageView.image = image
+  private func setupImageView(withImage image: UIImage) {
     imageView.frame.size = imageView.image!.size
     let doubleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didDoubleTapImageView(_:)))
     doubleTapRecognizer.numberOfTapsRequired = 2

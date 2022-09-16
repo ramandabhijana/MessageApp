@@ -12,7 +12,7 @@ struct SendMessageRequest: APIRequest {
   
   let accessToken: String
   let toUserId: Int
-  let message: String
+  var message: String? = nil
   var imageId: String? = nil
   var videoId: String? = nil
   
@@ -24,18 +24,16 @@ struct SendMessageRequest: APIRequest {
     self.videoId = nil
   }
   
-  init(accessToken: String, toUserId: Int, message: String, imageId: Int) {
+  init(accessToken: String, toUserId: Int, imageId: Int) {
     self.accessToken = accessToken
     self.toUserId = toUserId
-    self.message = message
     self.imageId = String(imageId)
     self.videoId = nil
   }
   
-  init(accessToken: String, toUserId: Int, message: String, videoId: Int) {
+  init(accessToken: String, toUserId: Int, videoId: Int) {
     self.accessToken = accessToken
     self.toUserId = toUserId
-    self.message = message
     self.imageId = nil
     self.videoId = String(videoId)
   }

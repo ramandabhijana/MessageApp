@@ -140,6 +140,13 @@ extension ProfileFeedViewController: UINavigationControllerDelegate {
                             animationControllerFor operation: UINavigationController.Operation,
                             from fromVC: UIViewController,
                             to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    guard
+      (fromVC is ProfileFeedViewController || fromVC is ProfileDisplayViewController)
+        &&
+      (toVC is ProfileDisplayViewController || toVC is ProfileFeedViewController)
+    else {
+      return nil
+    }
     if operation == .push {
       guard
         let selectedItemIndexPath = feedsCollectionView.indexPathsForSelectedItems?.last,

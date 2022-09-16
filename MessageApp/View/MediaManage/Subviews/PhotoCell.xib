@@ -19,20 +19,33 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w4n-Wq-jnJ">
                         <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                     </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Eu2-nM-JgR">
+                        <rect key="frame" x="0.0" y="0.5" width="180" height="179"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstItem="Eu2-nM-JgR" firstAttribute="bottom" secondItem="w4n-Wq-jnJ" secondAttribute="bottom" id="1P2-Xy-QBz"/>
+                <constraint firstItem="Eu2-nM-JgR" firstAttribute="trailing" secondItem="w4n-Wq-jnJ" secondAttribute="trailing" id="Eys-uG-fP6"/>
+                <constraint firstItem="Eu2-nM-JgR" firstAttribute="top" secondItem="w4n-Wq-jnJ" secondAttribute="top" id="IkI-Yl-yNc"/>
                 <constraint firstAttribute="trailing" secondItem="w4n-Wq-jnJ" secondAttribute="trailing" id="P84-Sz-1wP"/>
                 <constraint firstItem="w4n-Wq-jnJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="VYC-q0-ewk"/>
                 <constraint firstItem="w4n-Wq-jnJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dFp-XN-lNX"/>
                 <constraint firstAttribute="bottom" secondItem="w4n-Wq-jnJ" secondAttribute="bottom" id="wgb-lP-hWF"/>
+                <constraint firstItem="Eu2-nM-JgR" firstAttribute="leading" secondItem="w4n-Wq-jnJ" secondAttribute="leading" id="yqQ-Zf-1jE"/>
             </constraints>
             <size key="customSize" width="179" height="164"/>
             <connections>
+                <outlet property="playImageView" destination="Eu2-nM-JgR" id="C2j-9K-CYZ"/>
                 <outlet property="previewImageView" destination="w4n-Wq-jnJ" id="RAF-1T-ylA"/>
             </connections>
-            <point key="canvasLocation" x="231.15942028985509" y="99.776785714285708"/>
+            <point key="canvasLocation" x="230.43478260869566" y="99.776785714285708"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="play.circle" catalog="system" width="128" height="121"/>
+    </resources>
 </document>

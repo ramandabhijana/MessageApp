@@ -25,6 +25,8 @@ protocol TalkListPresenterProtocol: AnyObject {
   func removeTalkFromDeleteList(_ talk: TalkListItem)
   func getSelectedTalksValue() -> [TalkListItem]?
   func deleteSelectedTalks()
+  func presentTalkViewController(userId: Int, otherUserId: Int)
+  func createTalkMessage(for item: TalkListItem) -> String
 }
 
 class TalkListPresenter: TalkListPresenterProtocol {
@@ -35,7 +37,6 @@ class TalkListPresenter: TalkListPresenterProtocol {
   
   private let dataSource = TalkListDataSource()
   private let disposeBag = DisposeBag()
-  private var talksLookupTable: Dictionary<Int, Int> = [:]
   
   func beginEditing() {
     guard !talkItemSections.value[0].items.isEmpty else {
@@ -139,6 +140,15 @@ class TalkListPresenter: TalkListPresenterProtocol {
           var updatedSection = self.talkItemSections.value
           updatedSection[0].items = updatedTalks
           self.talkItemSections.accept(updatedSection)
+          
+          talks.forEach {
+            let otherUserId = [$0.userId, $0.toUserId]
+              .filter({ $0 != (try! AuthManager.userId.get()) })
+              .first!
+            let talkDataSource = TalkDataSource(otherUserId: otherUserId)
+            talkDataSource.removeTalk()
+          }
+          
           self.endEditing()
         },
         onError: { [weak self] error in
@@ -150,6 +160,30 @@ class TalkListPresenter: TalkListPresenterProtocol {
         }
       )
       .disposed(by: disposeBag)
+  }
+  
+  func presentTalkViewController(userId: Int, otherUserId: Int) {
+    let presenter = TalkPresenter(currentUserId: userId, otherUserId: otherUserId)
+    viewController?.navigationController?.pushViewController(
+      TalkViewController.createFromStoryboard(presenter: presenter),
+      animated: true)
+  }
+  
+  func createTalkMessage(for item: TalkListItem) -> String {
+    if let mediaType = item.mediaType,
+       let currentUserId = try? AuthManager.userId.get()
+    {
+      let sender = item.userId == currentUserId ? "You" : item.nickname
+      switch mediaType {
+      case IMAGE_MEDIA_TYPE:
+        return "\(sender) sent a photo."
+      case MOVIE_MEDIA_TYPE:
+        return "\(sender) sent a video."
+      default:
+        return item.message
+      }
+    }
+    return item.message
   }
 }
 

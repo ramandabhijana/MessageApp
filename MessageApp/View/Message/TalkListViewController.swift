@@ -46,14 +46,14 @@ class TalkListViewController: UIViewController {
     return item
   }
   private lazy var tableViewDataSource = RxTableViewSectionedAnimatedDataSource<SectionOfTalkListItem>(
-    configureCell: { _, tableView, indexPath, talkItem in
+    configureCell: { [unowned self] _, tableView, indexPath, talkItem in
       let cell = tableView.dequeueReusableCell(
         withIdentifier: TalkListCell.reuseIdentifier,
         for: indexPath) as! TalkListCell
       cell.configureView(with: TalkListCell.Model(
         imageURLString: talkItem.imageUrl,
         nickname: talkItem.nickname,
-        message: talkItem.message))
+        message: presenter.createTalkMessage(for: talkItem)))
       return cell
     },
     canEditRowAtIndexPath: { _, _ in
@@ -100,6 +100,12 @@ class TalkListViewController: UIViewController {
       .subscribe(onNext: { [unowned self] indexPath in
         guard !tableView.isEditing else { return }
         // Handle navigation
+        if let talkItem: TalkListItem = try? tableView.rx.model(at: indexPath),
+           let currentUserId = try? AuthManager.userId.get(),
+           let otherUserId = [talkItem.userId, talkItem.toUserId].filter({ $0 != currentUserId }).first
+        {
+          presenter.presentTalkViewController(userId: currentUserId, otherUserId: otherUserId)
+        }
         tableView.deselectRow(at: indexPath, animated: true)
       })
       .disposed(by: disposeBag)

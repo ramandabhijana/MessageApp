@@ -28,9 +28,6 @@ struct TalkListItem: Decodable, Equatable {
   let time: String
   let lastUpdateTime: String
   
-  static let IMAGE_MEDIA_TYPE = 1
-  static let MOVIE_MEDIA_TYPE = 2
-  
   static func initWithEntity(_ entity: TalkListItemEntity) -> TalkListItem {
     return TalkListItem(talkId: entity.talkId, toUserId: entity.toUserId, messageId: entity.messageId, userId: entity.userId, nickname: entity.nickname, imageId: entity.imageId, imageSize: entity.imageSize, imageUrl: entity.imageUrl, message: entity.message, mediaType: entity.mediaType.value, time: entity.time, lastUpdateTime: entity.lastUpdateTime)
   }

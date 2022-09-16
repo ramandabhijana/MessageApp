@@ -9,6 +9,8 @@ import UIKit
 import RxSwift
 
 final class KeyboardResponder {
+  static let SOME_ADDITIONAL_PADDING: CGFloat = 20.0
+  
   private var notificationCenter: NotificationCenter
   private let keyboardHeightSubject = PublishSubject<CGFloat>()
   
@@ -29,7 +31,7 @@ final class KeyboardResponder {
   
   @objc func keyBoardWillShow(notification: Notification) {
     if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size {
-      keyboardHeightSubject.onNext(keyboardSize.height + 20)
+      keyboardHeightSubject.onNext(keyboardSize.height + Self.SOME_ADDITIONAL_PADDING)
     }
   }
   
