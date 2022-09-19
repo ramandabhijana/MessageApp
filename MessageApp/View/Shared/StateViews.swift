@@ -31,6 +31,11 @@ var loadingView: UIStackView {
   label.font = .preferredFont(forTextStyle: .body)
   let loadingView = stateStackView(arrangedSubviews: [activityIndicator, label])
   loadingView.tag = StateViews.loading.rawValue
+  loadingView.isLayoutMarginsRelativeArrangement = true
+  loadingView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+  loadingView.backgroundColor = .white
+  loadingView.layer.masksToBounds = true
+  loadingView.layer.cornerRadius = 10
   return loadingView
 }
 

@@ -80,7 +80,8 @@ class ProfileDisplayPresenter: ProfileDisplayPresenterProtocol {
     let currentUserId = try! AuthManager.userId.get()
     let presenter = TalkPresenter(
       currentUserId: currentUserId,
-      otherUserId: feedItem.userId)
+      otherUserId: feedItem.userId,
+      shouldRefreshBlock: { _ in })
     let viewController = TalkViewController.createFromStoryboard(presenter: presenter)
     self.viewController?.navigationController?.pushViewController(viewController, animated: true)
   }

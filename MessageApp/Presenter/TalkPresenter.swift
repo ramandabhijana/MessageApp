@@ -17,7 +17,9 @@ protocol TalkPresenterProtocol: AnyObject {
   var currentUserId: Int { get }
   var talkItemSections: BehaviorRelay<[SectionOfTalkItem]> { get }
   
-  init(currentUserId: Int, otherUserId: Int)
+  var shouldRefreshTalkListOnBack: Bool { get }
+  
+  init(currentUserId: Int, otherUserId: Int, shouldRefreshBlock: @escaping (Bool) -> Void)
   
   func loadTalkWithOtherUser()
   func presentProfileDisplay(with profile: ProfileFeedItem)
@@ -26,6 +28,7 @@ protocol TalkPresenterProtocol: AnyObject {
   func presentPhotoViewer(imageURL: URL?)
   func presentVideoViewer(videoURL: URL?)
   func loadPastTalkPriorToTalk(withMessageId messageId: Int)
+  func didTapBackButton()
 }
 
 class TalkPresenter: TalkPresenterProtocol {
@@ -39,16 +42,23 @@ class TalkPresenter: TalkPresenterProtocol {
     return formatter
   }()
   
+  private let shouldRefreshBlock: (Bool) -> Void
+  private(set) var shouldRefreshTalkListOnBack: Bool = false
   private(set) var currentUserId: Int
   private let otherUserId: Int
   private var sectionDateIndexLookupTable: [String: Int] = [:]
   private let dataSource: TalkDataSource
   private let disposeBag = DisposeBag()
   
-  required init(currentUserId: Int, otherUserId: Int) {
+  required init(currentUserId: Int, otherUserId: Int, shouldRefreshBlock: @escaping (Bool) -> Void) {
+    self.shouldRefreshBlock = shouldRefreshBlock
     self.currentUserId = currentUserId
     self.otherUserId = otherUserId
     self.dataSource = TalkDataSource(otherUserId: otherUserId)
+  }
+  
+  func didTapBackButton() {
+    shouldRefreshBlock(shouldRefreshTalkListOnBack)
   }
   
   func loadTalkWithOtherUser() {
@@ -94,6 +104,11 @@ class TalkPresenter: TalkPresenterProtocol {
   
   private func sectionDateString(for dateString: String) -> String {
     let date = TalkItem.dateFormatter.date(from: dateString)!
+    if Calendar.current.isDateInToday(date) {
+      return "Today"
+    } else if Calendar.current.isDateInYesterday(date) {
+      return "Yesterday"
+    }
     return Self.sectionHeaderDateFormatter.string(from: date)
   }
   
@@ -255,6 +270,7 @@ extension TalkPresenter {
       .observeOn(MainScheduler.instance)
       .subscribe(
         onNext: { [weak self] talkItems in
+          self?.shouldRefreshTalkListOnBack = true
           self?.viewController?.inputTextView.isScrollEnabled = false
           self?.viewController?.inputTextView.text = String()
           

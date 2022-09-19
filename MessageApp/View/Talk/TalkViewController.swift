@@ -12,6 +12,8 @@ import RxDataSources
 
 class TalkViewController: UIViewController {
   private static let MAX_LINE_INPUT_TEXT = 3
+  private static let TEXT_INPUT_VIEW_MIN_HEIGHT: CGFloat = 38.0
+  private static let MIN_TABLEVIEW_CONTENT_INSET_TOP: CGFloat = 50.0
   
   static func createFromStoryboard(presenter: TalkPresenterProtocol) -> TalkViewController {
     let name = String(describing: TalkViewController.self)
@@ -47,7 +49,7 @@ class TalkViewController: UIViewController {
         PhotoBubbleReceivedCell.self,
         forCellReuseIdentifier: PhotoBubbleReceivedCell.reuseIdentifier)
       tableView.register(TalkDateHeaderView.self, forHeaderFooterViewReuseIdentifier: TalkDateHeaderView.reuseIdentifier)
-      tableView.contentInset.top = 50
+      tableView.contentInset.top = Self.MIN_TABLEVIEW_CONTENT_INSET_TOP
     }
   }
   
@@ -102,6 +104,13 @@ class TalkViewController: UIViewController {
     presenter.loadTalkWithOtherUser()
   }
   
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    if isMovingFromParent {
+      presenter.didTapBackButton()
+    }
+  }
+  
   private func setupTableView() {
     let talkItemSections = presenter.talkItemSections.asObservable().skip(1).share()
     bindDataSourceToTableView(talkItemSections: talkItemSections)
@@ -128,10 +137,14 @@ class TalkViewController: UIViewController {
         }
         
         // Since the tableview is upside down, we set the top content inset
-        self.tableView.contentInset.top = (height + 50)
+        self.tableView.contentInset.top = (
+          height
+          + Self.MIN_TABLEVIEW_CONTENT_INSET_TOP
+          + (self.inputTextView.bounds.height - Self.TEXT_INPUT_VIEW_MIN_HEIGHT)
+        )
         
-        // Scroll to bottom
-        if !self.presenter.talkItemSections.value.isEmpty {
+        // Scroll to bottom if keyboard is showing
+        if !self.presenter.talkItemSections.value.isEmpty && height > 0 {
           let indexPath = IndexPath(row: 0, section: 0)
           self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
@@ -168,7 +181,9 @@ class TalkViewController: UIViewController {
       .distinctUntilChanged()
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { [weak self] scrollEnabled in
-        self?.inputTextView.isScrollEnabled = scrollEnabled
+        guard let self = self else { return }
+        self.inputTextView.isScrollEnabled = scrollEnabled
+        self.inputTextView.invalidateIntrinsicContentSize()
       })
       .disposed(by: disposeBag)
   }

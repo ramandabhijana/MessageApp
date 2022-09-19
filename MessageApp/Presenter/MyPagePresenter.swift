@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import FittedSheets
+import RealmSwift
 
 protocol MyPagePresenterProtocol {
   var viewController: MyPageViewController? { get set }
@@ -42,6 +43,12 @@ class MyPagePresenter: MyPagePresenterProtocol, RootViewControllerReplacing {
   func logout() {
     // Delete token and replace root view controller
     AuthManager.logout()
+    
+    let realm = try! Realm()
+    try! realm.write {
+      realm.deleteAll()
+    }
+    
     replaceRootViewControllerWithTopViewController()
   }
   

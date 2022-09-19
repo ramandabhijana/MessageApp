@@ -18,7 +18,7 @@ protocol TalkListPresenterProtocol: AnyObject {
   func beginEditing()
   func endEditing()
   
-  func getTalkList()
+  func loadTalkList()
   func refreshTalkList()
   
   func addTalkToDeleteList(_ talk: TalkListItem)
@@ -63,7 +63,7 @@ class TalkListPresenter: TalkListPresenterProtocol {
     viewController?.removeDeleteButtonFromSubviews()
   }
   
-  func getTalkList() {
+  func loadTalkList() {
     viewController?.showLoadingView()
     dataSource.fetchTalkList()
       .map(\.items)
@@ -163,7 +163,12 @@ class TalkListPresenter: TalkListPresenterProtocol {
   }
   
   func presentTalkViewController(userId: Int, otherUserId: Int) {
-    let presenter = TalkPresenter(currentUserId: userId, otherUserId: otherUserId)
+    let presenter = TalkPresenter(
+      currentUserId: userId,
+      otherUserId: otherUserId,
+      shouldRefreshBlock: { [weak self] refresh in
+        if refresh { self?.refreshTalkList() }
+      })
     viewController?.navigationController?.pushViewController(
       TalkViewController.createFromStoryboard(presenter: presenter),
       animated: true)

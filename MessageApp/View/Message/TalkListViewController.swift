@@ -83,8 +83,8 @@ class TalkListViewController: UIViewController {
     bindDataSourceToTableView()
     
     refreshControl.rx.controlEvent(.valueChanged)
-      .subscribe { [unowned self] _ in
-        presenter.refreshTalkList()
+      .subscribe { [weak self] _ in
+        self?.presenter.refreshTalkList()
       }
       .disposed(by: disposeBag)
     
@@ -110,7 +110,7 @@ class TalkListViewController: UIViewController {
       })
       .disposed(by: disposeBag)
     
-    presenter.getTalkList()
+    presenter.loadTalkList()
   }
   
   private func bindDataSourceToTableView() {
