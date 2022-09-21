@@ -283,15 +283,17 @@ extension TalkPresenter {
           self?.viewController?.inputTextView.isScrollEnabled = false
           self?.viewController?.inputTextView.text = String()
           
-          self?.viewController?.sendButton.isHidden = false
-          self?.viewController?.sendButtonLoadingView.stopAnimating()
-          
           guard let talkItems = talkItems else { return }
           self?.insertFrontToTalkSections(talkItems: talkItems)
         },
         onError: { [weak self] error in
           self?.viewController?.showError(error)
-        })
+        },
+        onDisposed: { [weak self] in
+          self?.viewController?.sendButton.isHidden = false
+          self?.viewController?.sendButtonLoadingView.stopAnimating()
+        }
+      )
       .disposed(by: disposeBag)
   }
 }
