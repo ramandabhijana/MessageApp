@@ -56,6 +56,7 @@ class TalkViewController: UIViewController {
   @IBOutlet private var inputAreaBottomView: UIView!
   @IBOutlet weak var inputTextView: UITextView!
   @IBOutlet weak var sendButton: UIButton!
+  @IBOutlet weak var sendButtonLoadingView: UIActivityIndicatorView!
   
   let infiniteScrollIndicator = UIActivityIndicatorView(style: .medium)
   private var inputAreaBottomConstraint: NSLayoutConstraint? = nil

@@ -238,18 +238,27 @@ extension TalkPresenter {
 // MARK: - Send Message
 extension TalkPresenter {
   private func sendPhotoMessage(photoId: Int) {
+    beginSendingMessage()
     let sendMessageResponse = dataSource.sendPhoto(withId: photoId)
     handleSendMessageResponse(sendMessageResponse)
   }
   
   private func sendVideoMessage(videoId: Int) {
+    beginSendingMessage()
     let sendMessageResponse = dataSource.sendVideo(withId: videoId)
     handleSendMessageResponse(sendMessageResponse)
   }
   
   func sendTextMessage(text: String) {
+    beginSendingMessage()
     let sendMessageResponse = dataSource.sendMessage(text)
     handleSendMessageResponse(sendMessageResponse)
+  }
+  
+  private func beginSendingMessage() {
+    viewController?.sendButton.isEnabled = false
+    viewController?.sendButton.isHidden = true
+    viewController?.sendButtonLoadingView.startAnimating()
   }
   
   private func handleSendMessageResponse(_ sendMessageResponse: Observable<SendMessageResponse>) {
@@ -273,6 +282,9 @@ extension TalkPresenter {
           self?.shouldRefreshTalkListOnBack = true
           self?.viewController?.inputTextView.isScrollEnabled = false
           self?.viewController?.inputTextView.text = String()
+          
+          self?.viewController?.sendButton.isHidden = false
+          self?.viewController?.sendButtonLoadingView.stopAnimating()
           
           guard let talkItems = talkItems else { return }
           self?.insertFrontToTalkSections(talkItems: talkItems)

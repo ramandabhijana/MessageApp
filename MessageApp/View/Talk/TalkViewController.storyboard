@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,6 +36,7 @@
                         <outlet property="inputAreaBottomView" destination="xlY-Xf-6R6" id="oSn-Wl-QcI"/>
                         <outlet property="inputTextView" destination="gjx-lv-fec" id="wwY-X4-3IQ"/>
                         <outlet property="sendButton" destination="7nP-k4-QAZ" id="77d-7Y-HyO"/>
+                        <outlet property="sendButtonLoadingView" destination="e1K-x8-yB9" id="LpG-4o-J71"/>
                         <outlet property="tableView" destination="QFU-2h-biC" id="N0p-En-R9X"/>
                     </connections>
                 </viewController>
@@ -65,6 +67,10 @@
                                 <action selector="didTapSendButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="HXA-80-TcD"/>
                             </connections>
                         </button>
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="e1K-x8-yB9">
+                            <rect key="frame" x="339.5" y="59" width="20" height="20"/>
+                            <color key="color" name="AccentColor"/>
+                        </activityIndicatorView>
                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqK-Vh-OhF">
                             <rect key="frame" x="8" y="59" width="39.5" height="24"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -93,11 +99,13 @@
                     <constraints>
                         <constraint firstItem="nqK-Vh-OhF" firstAttribute="bottom" secondItem="gjx-lv-fec" secondAttribute="bottom" id="0px-B7-Zv1"/>
                         <constraint firstAttribute="bottom" secondItem="gjx-lv-fec" secondAttribute="bottom" constant="16" id="BPE-by-YLS"/>
+                        <constraint firstItem="e1K-x8-yB9" firstAttribute="centerY" secondItem="7nP-k4-QAZ" secondAttribute="centerY" id="DTD-Yh-fR4"/>
                         <constraint firstAttribute="trailing" secondItem="7nP-k4-QAZ" secondAttribute="trailing" constant="8" id="GKQ-G4-Xxw"/>
                         <constraint firstAttribute="trailing" secondItem="tQt-3D-tZO" secondAttribute="trailing" id="HGT-Jl-fJB"/>
                         <constraint firstItem="nqK-Vh-OhF" firstAttribute="leading" secondItem="xlY-Xf-6R6" secondAttribute="leading" constant="8" id="OyD-qZ-4VD"/>
                         <constraint firstItem="gjx-lv-fec" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xlY-Xf-6R6" secondAttribute="top" constant="16" id="Pll-oV-AGN"/>
                         <constraint firstItem="7nP-k4-QAZ" firstAttribute="bottom" secondItem="gjx-lv-fec" secondAttribute="bottom" id="Qld-lX-78s"/>
+                        <constraint firstItem="e1K-x8-yB9" firstAttribute="centerX" secondItem="7nP-k4-QAZ" secondAttribute="centerX" id="WMl-Qx-ujJ"/>
                         <constraint firstItem="7nP-k4-QAZ" firstAttribute="width" secondItem="xlY-Xf-6R6" secondAttribute="width" multiplier="0.2" id="Z0a-TG-Oee"/>
                         <constraint firstItem="gjx-lv-fec" firstAttribute="leading" secondItem="nqK-Vh-OhF" secondAttribute="trailing" constant="4" id="ZHN-O5-AkH"/>
                         <constraint firstItem="tQt-3D-tZO" firstAttribute="top" secondItem="xlY-Xf-6R6" secondAttribute="top" id="lVC-RZ-I0k"/>
@@ -112,6 +120,9 @@
     </scenes>
     <resources>
         <image name="photo" catalog="system" width="128" height="93"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
